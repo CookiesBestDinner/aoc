@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NamedFieldPuns #-}
-module Main where
+
+module Day3 where
 
 import Data.Attoparsec.Text
 import Data.List (intercalate)
@@ -19,8 +20,9 @@ main = do
   putStrLn $ "part1: " ++ show part1
   putStrLn $ "part2: " ++ prettyPart2
 
-fromRight :: Either a b -> b
+fromRight :: Either String b -> b
 fromRight (Right x) = x
+fromRight (Left e) = error e
 
 -- check whether a claim does not overlap with any other claim
 -- all coordinates of the claim will have a sum of 1

@@ -7,8 +7,6 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE NamedFieldPuns #-}
 
-module Main where
-
 import Data.Char
 import Data.Map.Strict (Map)
 import Text.ParserCombinators.ReadP

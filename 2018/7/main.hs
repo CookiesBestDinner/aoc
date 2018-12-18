@@ -63,8 +63,8 @@ pDependenies :: Parser [(Char, Char)]
 pDependenies =
   (`sepBy` endOfLine)
     $   (,)
-    <$  string "Step "
-    <*> satisfy (`elem` ['A' .. 'Z'])
-    <*  string " must be finished before step "
-    <*> satisfy (`elem` ['A' .. 'Z'])
-    <*  string " can begin."
+    <$  "Step "
+    <*> satisfy isAsciiUpper
+    <*  " must be finished before step "
+    <*> satisfy isAsciiUpper
+    <*  " can begin."

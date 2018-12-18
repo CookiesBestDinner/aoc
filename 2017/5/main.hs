@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 import Data.Attoparsec.Text
 import qualified Data.Map as Map
 import qualified Data.Text.IO as TIO
@@ -25,7 +23,6 @@ stepsToEscape maze loc
                    else 1
     newMaze = Map.adjust (+increment) loc maze
     newLoc = loc + maze Map.! loc
-
 
 -- Map location value
 pInput :: Parser (Map.Map Int Int)

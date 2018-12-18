@@ -1,0 +1,44 @@
+name: aoc2017
+version: 0.0.0.1
+author: jonatan
+
+dependencies:
+  - base
+  - containers
+  - attoparsec
+  - megaparsec
+  - text
+  - extra
+
+ghc-options:
+  - -O2
+  - -Wall
+
+default-extensions:
+  - OverloadedStrings
+
+executables:
+
+  2:
+    main: main.hs
+    source-dirs: '2'
+
+  3:
+    main: main.hs
+    source-dirs: '3'
+
+  4:
+    main: main.hs
+    source-dirs: '4'
+
+  5:
+    main: main.hs
+    source-dirs: '5'
+
+  6:
+    main: main.hs
+    source-dirs: '6'
+
+  7:
+    main: main.hs
+    source-dirs: '7'

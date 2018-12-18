@@ -1,4 +1,4 @@
-name: aoc
+name: aoc2018
 version: 0.0.0.1
 author: jonatan
 
@@ -16,12 +16,12 @@ default-extensions:
   - OverloadedStrings
 
 executables:
-  18_3:
+  3:
     main: main.hs
-    source-dirs: 2018/3
-  18_7:
+    source-dirs: '3'
+  7:
     main: main.hs
-    source-dirs: 2018/7
-  18_1:
+    source-dirs: '7'
+  1:
     main: main.hs
-    source-dirs: 2018/1
+    source-dirs: '1'

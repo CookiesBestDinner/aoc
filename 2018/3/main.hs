@@ -16,7 +16,7 @@ main :: IO ()
 main = interact run
 
 run :: String -> String
-run s = show claims
+run s = show overlapCount ++ "\n"
  where
   claims       = runParse parseClaims s
   marked       = markClaims claims
@@ -51,15 +51,15 @@ parseClaims = do
 
 claim :: ReadP Claim
 claim = do
-  char '#'
+  _ <- char '#'
   n <- fmap read $ many1 $ satisfy isDigit
-  string " @ "
+  _ <- string " @ "
   col <- fmap read $ many1 $ satisfy isDigit
-  char ','
+  _ <- char ','
   row <- fmap read $ many1 $ satisfy isDigit
-  string ": "
+  _ <- string ": "
   width <- fmap read $ many1 $ satisfy isDigit
-  char 'x'
+  _ <- char 'x'
   height <- fmap read $ many1 $ satisfy isDigit
-  char '\n'
+  _ <- char '\n'
   return $ Claim {n , col , row , width , height }

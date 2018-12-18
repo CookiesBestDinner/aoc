@@ -42,3 +42,7 @@ executables:
   7:
     main: main.hs
     source-dirs: '7'
+
+  8:
+    main: main.hs
+    source-dirs: '8'

@@ -1,0 +1,146 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 32e30a01166c2e0d1b1c5a9e3ffe2c68ca0fb7769c2bf23ca7ca86a9f7bec2f2
+
+name:           aoc2015
+version:        0.0.0
+build-type:     Simple
+
+library
+  other-modules:
+      Paths_aoc2015
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -rtsopts -O2
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , containers
+    , extra
+    , hashable
+    , replace-attoparsec
+    , safe
+    , scientific
+    , split
+    , text
+    , unordered-containers
+  default-language: Haskell2010
+
+executable d1
+  main-is: Main.hs
+  other-modules:
+      Paths_aoc2015
+  hs-source-dirs:
+      ./1
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -rtsopts -O2
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , containers
+    , extra
+    , hashable
+    , replace-attoparsec
+    , safe
+    , scientific
+    , split
+    , text
+    , unordered-containers
+  default-language: Haskell2010
+
+executable d16
+  main-is: Main.hs
+  other-modules:
+      Paths_aoc2015
+  hs-source-dirs:
+      ./16
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -rtsopts -O2
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , containers
+    , extra
+    , hashable
+    , replace-attoparsec
+    , safe
+    , scientific
+    , split
+    , text
+    , unordered-containers
+  default-language: Haskell2010
+
+executable d17
+  main-is: Main.hs
+  other-modules:
+      Paths_aoc2015
+  hs-source-dirs:
+      ./17
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -rtsopts -O2
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , containers
+    , extra
+    , hashable
+    , replace-attoparsec
+    , safe
+    , scientific
+    , split
+    , text
+    , unordered-containers
+  default-language: Haskell2010
+
+executable d18
+  main-is: Main.hs
+  other-modules:
+      Paths_aoc2015
+  hs-source-dirs:
+      ./18
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -rtsopts -O2
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , containers
+    , extra
+    , hashable
+    , replace-attoparsec
+    , safe
+    , scientific
+    , split
+    , text
+    , unordered-containers
+  default-language: Haskell2010
+
+executable d19
+  main-is: Main.hs
+  other-modules:
+      Paths_aoc2015
+  hs-source-dirs:
+      ./19
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -rtsopts -O2
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , containers
+    , extra
+    , hashable
+    , replace-attoparsec
+    , safe
+    , scientific
+    , split
+    , text
+    , unordered-containers
+  default-language: Haskell2010

@@ -1,0 +1,148 @@
+name:                aoc2016
+
+# version:             0.1.0.0
+# github:              githubuser/myproject
+# license:             BSD3
+# author:              Author name here
+# maintainer:          example@example.com
+# copyright:           2019 Author name here
+
+# extra-source-files:
+# - README.md
+# - ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+dependencies:
+
+- aeson
+- attoparsec
+- base
+- bytestring
+- containers
+- cryptonite
+- extra
+- hashable
+- megaparsec
+- memory
+- protolude
+- relude
+- replace-attoparsec
+- safe
+- scientific
+- split
+- text
+- unordered-containers
+
+# - shakespeare
+# - rio
+# - megaparsec
+# - flow
+# - stm
+# - mtl
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wpartial-fields
+- -Wredundant-constraints
+- -rtsopts
+- -O2
+
+executables:
+  d1:
+    main: Main.hs
+    source-dirs: ./1
+  d2:
+    main: Main.hs
+    source-dirs: ./2
+  d3:
+    main: Main.hs
+    source-dirs: ./3
+  d4:
+    main: Main.hs
+    source-dirs: ./4
+  d5:
+    main: Main.hs
+    source-dirs: ./5
+  d6:
+    main: Main.hs
+    source-dirs: ./6
+  d7:
+    main: Main.hs
+    source-dirs: ./7
+  d8:
+    main: Main.hs
+    source-dirs: ./8
+  d9:
+    main: Main.hs
+    source-dirs: ./9
+  # d10:
+  #   main: Main.hs
+  #   source-dirs: ./10
+  #   dependencies: aoc2016
+  # d11:
+  #   main: Main.hs
+  #   source-dirs: ./11
+  #   dependencies: aoc2016
+  # d12:
+  #   main: Main.hs
+  #   source-dirs: ./12
+  #   dependencies: aoc2016
+  # d13:
+  #   main: Main.hs
+  #   source-dirs: ./13
+  #   dependencies: aoc2016
+  # d14:
+  #   main: Main.hs
+  #   source-dirs: ./14
+  #   dependencies: aoc2016
+  # d15:
+  #   main: Main.hs
+  #   source-dirs: ./15
+  #   dependencies: aoc2016
+  # d16:
+  #   main: Main.hs
+  #   source-dirs: ./16
+  #   dependencies: aoc2016
+  # d17:
+  #   main: Main.hs
+  #   source-dirs: ./17
+  #   dependencies: aoc2016
+  # d18:
+  #   main: Main.hs
+  #   source-dirs: ./18
+  #   dependencies: aoc2016
+  # d19:
+  #   main: Main.hs
+  #   source-dirs: ./19
+  #   dependencies: aoc2016
+  # d20:
+  #   main: Main.hs
+  #   source-dirs: ./20
+  #   dependencies: aoc2016
+  # d21:
+  #   main: Main.hs
+  #   source-dirs: ./21
+  #   dependencies: aoc2016
+  # d22:
+  #   main: Main.hs
+  #   source-dirs: ./22
+  #   dependencies: aoc2016
+  # d23:
+  #   main: Main.hs
+  #   source-dirs: ./23
+  #   dependencies: aoc2016
+  # d24:
+  #   main: Main.hs
+  #   source-dirs: ./24
+  #   dependencies: aoc2016
+  # d25:
+  #   main: Main.hs
+  #   source-dirs: ./25
+  #   dependencies: aoc2016

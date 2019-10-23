@@ -40,7 +40,7 @@ workFrames steps depMap wip =
     [ (step, costPerStep step) | step <- steps, not $ Map.member step depMap ]
   newJobs        = Prelude.take availableWorkers availableJobs
   currentWip     = wip ++ newJobs
-  remainingSteps = steps \\ (map fst newJobs)
+  remainingSteps = steps \\ map fst newJobs
   -- clean up after what finshes at the end of this timeframe
   remainingWip   = [ (step, time - 1) | (step, time) <- currentWip, time > 1 ]
   completedSteps = [ step | (step, time) <- currentWip, time == 1 ]
@@ -48,7 +48,7 @@ workFrames steps depMap wip =
   newDepMap      = Map.filter (not . null) newDepMap'
 
 costPerStep :: Char -> Integer
-costPerStep ch = baseTimePerJob + (fromIntegral $ ord ch) - 64
+costPerStep ch = baseTimePerJob + fromIntegral (ord ch) - 64
 
 thingymajig :: String -> Map.Map Char String -> String
 thingymajig []    _      = []

@@ -1,11 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 import Data.Attoparsec.Text
-import Prelude hiding (compare)
 import Data.Map (Map)
 import Data.Text (Text)
-import qualified Data.Text.IO as TIO
+import Prelude hiding (compare)
 import qualified Data.Map as Map
+import qualified Data.Text as Text
+import qualified Data.Text.IO as TIO
 
 main :: IO ()
 main = do
@@ -47,7 +48,7 @@ operation register what howMuch condreg condop condval registers =
     "<=" -> (<=)
     "==" -> (==)
     "!=" -> (/=)
-    _    -> error "no such comparison"
+    badop -> error $ mappend "unknown comparison: " $ Text.unpack badop
 
 parseOp :: Parser (Map String Int -> Map String Int)
 parseOp =

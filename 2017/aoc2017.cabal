@@ -1,0 +1,131 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: c0ac0a4930d5ec33818cc1e3fac181cf94b51c6f39441ec37d7e4c2ba4b6b5b1
+
+name:           aoc2017
+version:        0.0.0.1
+author:         jonatan
+build-type:     Simple
+
+executable 2
+  main-is: main.hs
+  other-modules:
+      Paths_aoc2017
+  hs-source-dirs:
+      2
+  default-extensions: OverloadedStrings
+  ghc-options: -O2 -Wall
+  build-depends:
+      attoparsec
+    , base
+    , containers
+    , extra
+    , megaparsec
+    , text
+  default-language: Haskell2010
+
+executable 3
+  main-is: main.hs
+  other-modules:
+      Paths_aoc2017
+  hs-source-dirs:
+      3
+  default-extensions: OverloadedStrings
+  ghc-options: -O2 -Wall
+  build-depends:
+      attoparsec
+    , base
+    , containers
+    , extra
+    , megaparsec
+    , text
+  default-language: Haskell2010
+
+executable 4
+  main-is: main.hs
+  other-modules:
+      Paths_aoc2017
+  hs-source-dirs:
+      4
+  default-extensions: OverloadedStrings
+  ghc-options: -O2 -Wall
+  build-depends:
+      attoparsec
+    , base
+    , containers
+    , extra
+    , megaparsec
+    , text
+  default-language: Haskell2010
+
+executable 5
+  main-is: main.hs
+  other-modules:
+      Paths_aoc2017
+  hs-source-dirs:
+      5
+  default-extensions: OverloadedStrings
+  ghc-options: -O2 -Wall
+  build-depends:
+      attoparsec
+    , base
+    , containers
+    , extra
+    , megaparsec
+    , text
+  default-language: Haskell2010
+
+executable 6
+  main-is: main.hs
+  other-modules:
+      Paths_aoc2017
+  hs-source-dirs:
+      6
+  default-extensions: OverloadedStrings
+  ghc-options: -O2 -Wall
+  build-depends:
+      attoparsec
+    , base
+    , containers
+    , extra
+    , megaparsec
+    , text
+  default-language: Haskell2010
+
+executable 7
+  main-is: main.hs
+  other-modules:
+      Paths_aoc2017
+  hs-source-dirs:
+      7
+  default-extensions: OverloadedStrings
+  ghc-options: -O2 -Wall
+  build-depends:
+      attoparsec
+    , base
+    , containers
+    , extra
+    , megaparsec
+    , text
+  default-language: Haskell2010
+
+executable 8
+  main-is: main.hs
+  other-modules:
+      Paths_aoc2017
+  hs-source-dirs:
+      8
+  default-extensions: OverloadedStrings
+  ghc-options: -O2 -Wall
+  build-depends:
+      attoparsec
+    , base
+    , containers
+    , extra
+    , megaparsec
+    , text
+  default-language: Haskell2010

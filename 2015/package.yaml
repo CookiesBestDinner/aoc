@@ -1,0 +1,67 @@
+name:                aoc2015
+
+executables:
+  d1:
+    main: Main.hs
+    source-dirs: ./1
+  d16:
+    main: Main.hs
+    source-dirs: ./16
+  d17:
+    main: Main.hs
+    source-dirs: ./17
+  d18:
+    main: Main.hs
+    source-dirs: ./18
+  d19:
+    main: Main.hs
+    source-dirs: ./19
+# version:             0.1.0.0
+# github:              githubuser/myproject
+# license:             BSD3
+# author:              Author name here
+# maintainer:          example@example.com
+# copyright:           2019 Author name here
+
+# extra-source-files:
+# - README.md
+# - ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+dependencies:
+- aeson
+- base
+- bytestring
+- attoparsec
+- containers
+- extra
+- split
+- text
+- safe
+- scientific
+- hashable
+- unordered-containers
+- replace-attoparsec
+# - shakespeare
+# - rio
+# - megaparsec
+# - flow
+# - stm
+# - mtl
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wpartial-fields
+- -Wredundant-constraints
+- -rtsopts
+- -O2
+
+library:
+  source-dirs: []

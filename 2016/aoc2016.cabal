@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3a0d0b16055f383458ea4e9e60ee413fa00dd96d59c1f9dc500447348b59c2d1
+-- hash: 3e8b2183d92509e3d7fdbab308c18c97d3297b72066224e327eef2f0a862e967
 
 name:           aoc2016
 version:        0.0.0
@@ -212,6 +212,34 @@ executable d8
       Paths_aoc2016
   hs-source-dirs:
       ./8
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -rtsopts -O2
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , containers
+    , cryptonite
+    , extra
+    , hashable
+    , megaparsec
+    , memory
+    , protolude
+    , relude
+    , replace-attoparsec
+    , safe
+    , scientific
+    , split
+    , text
+    , unordered-containers
+  default-language: Haskell2010
+
+executable d9
+  main-is: Main.hs
+  other-modules:
+      Paths_aoc2016
+  hs-source-dirs:
+      ./9
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -rtsopts -O2
   build-depends:
       aeson

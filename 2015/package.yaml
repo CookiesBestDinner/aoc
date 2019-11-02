@@ -16,6 +16,9 @@ executables:
   d19:
     main: Main.hs
     source-dirs: ./19
+  d25:
+    main: Main.hs
+    source-dirs: ./25
 # version:             0.1.0.0
 # github:              githubuser/myproject
 # license:             BSD3
@@ -38,6 +41,8 @@ dependencies:
 - attoparsec
 - containers
 - extra
+- megaparsec
+- protolude
 - split
 - text
 - safe

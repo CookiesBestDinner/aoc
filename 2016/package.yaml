@@ -82,67 +82,51 @@ executables:
   d9:
     main: Main.hs
     source-dirs: ./9
-  # d10:
-  #   main: Main.hs
-  #   source-dirs: ./10
-  #   dependencies: aoc2016
+  d10:
+    main: Main.hs
+    source-dirs: ./10
   # d11:
   #   main: Main.hs
   #   source-dirs: ./11
-  #   dependencies: aoc2016
   # d12:
   #   main: Main.hs
   #   source-dirs: ./12
-  #   dependencies: aoc2016
   # d13:
   #   main: Main.hs
   #   source-dirs: ./13
-  #   dependencies: aoc2016
   # d14:
   #   main: Main.hs
   #   source-dirs: ./14
-  #   dependencies: aoc2016
   # d15:
   #   main: Main.hs
   #   source-dirs: ./15
-  #   dependencies: aoc2016
   # d16:
   #   main: Main.hs
   #   source-dirs: ./16
-  #   dependencies: aoc2016
   # d17:
   #   main: Main.hs
   #   source-dirs: ./17
-  #   dependencies: aoc2016
   # d18:
   #   main: Main.hs
   #   source-dirs: ./18
-  #   dependencies: aoc2016
   # d19:
   #   main: Main.hs
   #   source-dirs: ./19
-  #   dependencies: aoc2016
   # d20:
   #   main: Main.hs
   #   source-dirs: ./20
-  #   dependencies: aoc2016
   # d21:
   #   main: Main.hs
   #   source-dirs: ./21
-  #   dependencies: aoc2016
   # d22:
   #   main: Main.hs
   #   source-dirs: ./22
-  #   dependencies: aoc2016
   # d23:
   #   main: Main.hs
   #   source-dirs: ./23
-  #   dependencies: aoc2016
   # d24:
   #   main: Main.hs
   #   source-dirs: ./24
-  #   dependencies: aoc2016
   # d25:
   #   main: Main.hs
   #   source-dirs: ./25
-  #   dependencies: aoc2016

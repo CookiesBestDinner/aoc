@@ -46,6 +46,7 @@ dependencies:
 - split
 - text
 - safe
+- protolude
 - scientific
 - hashable
 - unordered-containers

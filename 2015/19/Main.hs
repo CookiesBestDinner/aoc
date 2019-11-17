@@ -20,7 +20,8 @@ main = do
       possibleTransforms = synthesizeStep transformMap medicine
   print $ Set.size possibleTransforms
   -- print $ searchFor 0 medicine transformMap Set.empty (Set.fromList ["e"])
-  print $ searchFor2 0 medicine transformMap (Set.fromList ["e"])
+  -- print $ searchFor2 0 medicine transformMap (Set.fromList ["e"])
+  print transformPairs
 
 searchFor n medicine transformations seen input
   | medicine `Set.member` input

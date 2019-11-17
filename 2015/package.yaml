@@ -16,6 +16,9 @@ executables:
   d19:
     main: Main.hs
     source-dirs: ./19
+  d24:
+    main: Main.hs
+    source-dirs: ./24
   d25:
     main: Main.hs
     source-dirs: ./25
@@ -35,28 +38,23 @@ executables:
 # category:            Web
 
 dependencies:
+
 - aeson
+- attoparsec
 - base
 - bytestring
-- attoparsec
 - containers
 - extra
+- hashable
 - megaparsec
+- pretty-show
 - protolude
+- replace-attoparsec
+- safe
+- scientific
 - split
 - text
-- safe
-- protolude
-- scientific
-- hashable
 - unordered-containers
-- replace-attoparsec
-# - shakespeare
-# - rio
-# - megaparsec
-# - flow
-# - stm
-# - mtl
 
 ghc-options:
 - -Wall
@@ -66,6 +64,7 @@ ghc-options:
 - -Wincomplete-uni-patterns
 - -Wpartial-fields
 - -Wredundant-constraints
+- -fno-warn-unused-do-bind
 - -rtsopts
 - -O2
 

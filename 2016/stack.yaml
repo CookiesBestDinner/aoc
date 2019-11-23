@@ -1,4 +1,4 @@
-resolver: lts-13.30
+resolver: lts-14.14
 extra-deps:
 - replace-attoparsec-1.0.3.0@sha256:f5a6ed1ab83a2291c3190fc152c76967a1ccafbc488041f51519425716784ea6,2465
 packages:

@@ -2,47 +2,73 @@ name: aoc2017
 version: 0.0.0.1
 author: jonatan
 
+library:
+  source-dirs:
+    - .
+    - src
+
+tests:
+  hspecdiscover:
+    main: Spec.hs
+    source-dirs: test
+    dependencies:
+      - hspec
+      - aoc2017
+
 dependencies:
+
+  - attoparsec
   - base
   - containers
-  - attoparsec
-  - megaparsec
-  - text
+  - qm-interpolated-string
   - extra
+  - hspec
+  - megaparsec
+  - mtl
+  - protolude
+  - split
+  - text
 
 ghc-options:
-  - -O2
-  - -Wall
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wpartial-fields
+- -Wredundant-constraints
+- -fno-warn-unused-do-bind
+- -rtsopts
+# - -O2
 
 default-extensions:
   - OverloadedStrings
 
 executables:
-
-  2:
-    main: main.hs
-    source-dirs: '2'
-
-  3:
-    main: main.hs
-    source-dirs: '3'
-
-  4:
-    main: main.hs
-    source-dirs: '4'
-
-  5:
-    main: main.hs
-    source-dirs: '5'
-
-  6:
-    main: main.hs
-    source-dirs: '6'
-
-  7:
-    main: main.hs
-    source-dirs: '7'
-
-  8:
-    main: main.hs
-    source-dirs: '8'
+  main:
+    main: Main.hs
+    source-dirs: app
+    dependencies: aoc2017
+#   2:
+#     main: main.hs
+#     source-dirs: '2'
+#   3:
+#     main: main.hs
+#     source-dirs: '3'
+#   4:
+#     main: main.hs
+#     source-dirs: '4'
+#   5:
+#     main: main.hs
+#     source-dirs: '5'
+#   6:
+#     main: main.hs
+#     source-dirs: '6'
+#   7:
+#     main: main.hs
+#     source-dirs: '7'
+#   8:
+#     main: main.hs
+#     source-dirs: '8'
+#   9:
+#     main: Day09.Main.main

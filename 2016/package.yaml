@@ -27,6 +27,7 @@ dependencies:
 - hashable
 - megaparsec
 - memory
+- pretty-show
 - protolude
 - relude
 - replace-attoparsec
@@ -88,9 +89,9 @@ executables:
   # d11:
   #   main: Main.hs
   #   source-dirs: ./11
-  # d12:
-  #   main: Main.hs
-  #   source-dirs: ./12
+  d12:
+    main: Main.hs
+    source-dirs: ./12
   # d13:
   #   main: Main.hs
   #   source-dirs: ./13

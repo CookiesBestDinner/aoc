@@ -10,6 +10,12 @@
 -- 17370  35487  37402  39835  42452   45220  47108   48065
 --
 -- and I was lucky enough to do it correctly *phew*
+--
+-- update: random thought weeks/months later:
+-- maybe start in the middle (1) with direction:down
+-- and repeatedly do: if (can turn left) then turn left else go forward
+-- and at each location sum up the 8 adjacent values with defaults of 0
+-- leaving behind a list of values as the result
 
 import Prelude hiding (Either(..))
 

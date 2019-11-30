@@ -20,12 +20,13 @@ dependencies:
   - attoparsec
   - base
   - containers
-  - qm-interpolated-string
   - extra
   - hspec
   - megaparsec
   - mtl
+  - pretty-show
   - protolude
+  - qm-interpolated-string
   - split
   - text
 
@@ -39,7 +40,7 @@ ghc-options:
 - -Wredundant-constraints
 - -fno-warn-unused-do-bind
 - -rtsopts
-# - -O2
+- -O2
 
 default-extensions:
   - OverloadedStrings

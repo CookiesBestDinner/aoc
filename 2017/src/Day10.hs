@@ -1,7 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Day10.Main where
+module Day10 where
 
 import           Data.List       (iterate', (!!))
 import           Data.List.Split (chunksOf)
@@ -20,9 +20,9 @@ data Ring =
     }
   deriving (Show)
 
-main :: IO ()
-main = do
-  putText "hello!"
+-- for Day14 to import
+knotHash :: Text -> Text
+knotHash input = solve2 input [0..255]
 
 step :: Ring -> Int -> Ring
 step r len =

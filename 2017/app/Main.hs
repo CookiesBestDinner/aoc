@@ -8,6 +8,7 @@ module Main where
 import qualified Day12
 import qualified Day13
 import qualified Day14
+import qualified Day15
 import           Prelude   (error)
 import           Protolude
 
@@ -18,4 +19,5 @@ main = do
     ["12"] -> Day12.main
     ["13"] -> Day13.main
     ["14"] -> Day14.main
+    ["15"] -> Day15.main
     _      -> error "I'm not aware of that day."

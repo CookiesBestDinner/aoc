@@ -1,0 +1,56 @@
+name: aoc2019
+version: 0.0.0.1
+author: jonatan
+
+dependencies:
+
+  - aeson
+  - attoparsec
+  - base
+  - bytestring
+  - containers
+  - extra
+  - hashable
+  - hspec
+  - megaparsec
+  - mtl
+  - pretty-show
+  - protolude
+  - qm-interpolated-string
+  - replace-attoparsec
+  - safe
+  - scientific
+  - split
+  - text
+  - unordered-containers
+
+ghc-options:
+
+- -O2
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wpartial-fields
+- -Wredundant-constraints
+- -fno-warn-unused-do-bind
+- -rtsopts
+
+executables:
+  main:
+    main: Main.hs
+    source-dirs: app
+    dependencies: aoc2019
+
+library:
+  source-dirs:
+    - src
+
+# tests:
+#   hspecdiscover:
+#     main: Spec.hs
+#     source-dirs: test
+#     dependencies:
+#       - hspec
+#       - aoc2019

@@ -23,5 +23,5 @@ main = do
 insert :: (Int, Seq Int) -> (Int, Int) -> (Int, Seq Int)
 insert (loc, buf) (x, steps) = (at, buf')
   where
-    at = ((loc + steps) `mod` (Seq.length buf)) + 1
+    at = ((loc + steps) `mod` Seq.length buf) + 1
     buf' = Seq.insertAt at x buf

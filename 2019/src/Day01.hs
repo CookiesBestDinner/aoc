@@ -1,27 +1,20 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-
 module Day01 where
 
-import           Protolude
-import           Text.Megaparsec
-import           Text.Megaparsec.Char
-import           Text.Megaparsec.Char.Lexer
-
-type Parser = Parsec Void Text
-
-pSOMETHING :: Parser ()
-pSOMETHING = do
-  undefined
-
-getInput :: Text -> IO ()
-getInput input = case parse pSOMETHING "" input of
-  Left boo -> do
-    putStrLn $ errorBundlePretty boo
-    exitFailure
-  Right yay -> return yay
+import           Data.Function ((&))
+import           Data.Functor  ((<&>))
 
 main :: IO ()
 main = do
   input <- getContents
-  putText "Herro world!"
+  let nums = input & words <&> read
+  let mass = nums <&> fuelForMass & sum
+  print mass
+  nums <&> fuelForFuel & sum & print
+
+fuelForFuel :: Integer -> Integer
+fuelForFuel m = extras & takeWhile (> 0) & sum
+  where
+    extras = fuelForMass m : (fuelForMass <$> extras)
+
+fuelForMass :: Integer -> Integer
+fuelForMass m = m `div` 3 & subtract 2

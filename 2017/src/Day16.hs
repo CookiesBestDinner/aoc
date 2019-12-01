@@ -44,23 +44,10 @@ runMove (Partner a b) dance = runMove (Exchange pa pb) dance
 pInstruction :: Parser Move
 pInstruction = choice [pPartner, pExchange, pSpin]
  where
-  pProgram = oneOf ['a' .. 'p']
-  pPartner = do
-    "p"
-    a <- pProgram
-    "/"
-    b <- pProgram
-    return (Partner a b)
-  pExchange = do
-    "x"
-    a <- decimal
-    "/"
-    b <- decimal
-    return (Exchange a b)
-  pSpin = do
-    "s"
-    x <- decimal
-    return (Spin x)
+  pProgram  = oneOf ['a' .. 'p']
+  pPartner  = Partner <$ "p" <*> pProgram <* "/" <*> pProgram
+  pExchange = Exchange <$ "x" <*> decimal <* "/" <*> decimal
+  pSpin     = Spin <$ "s" <*> decimal
 
 cycleN :: Int -> [a] -> [a]
 cycleN n = replicate n >>> concat

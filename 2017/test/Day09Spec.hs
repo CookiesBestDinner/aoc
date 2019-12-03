@@ -42,7 +42,7 @@ spec = do
     forM_ examples2 $ \(input, expect) -> do
       it (T.unpack input) $ do
         (solve input <&> garbageCount) `shouldBe` (Right expect)
-  input <- runIO $ readFile "data/input/day09"
+  input <- runIO $ readFile "input/day09"
   describe "full input" $ do
     it "solves part1 and part2" $ do
       solve input `shouldBe` (Right $ Result 20530 9978)

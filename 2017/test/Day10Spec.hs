@@ -3,7 +3,7 @@
 module Day10Spec where
 
 import           Protolude
-import           Day10.Main                               ( solve
+import           Day10                                    ( solve
                                                           , solve2
                                                           )
 import           Test.Hspec
@@ -28,8 +28,8 @@ spec = do
     it ("puzzle input: " <> T.unpack input) $ do
       solve input [0 .. 255] `shouldBe` 52070
   describe "part2" $ do
-    forM_ p2Examples $ \ (input, output)-> do
+    forM_ p2Examples $ \(input, output) -> do
       it (T.unpack $ mconcat [show input, " -> ", output]) $ do
         solve2 input [0 .. 255] `shouldBe` output
     it ("puzzle input: " <> T.unpack input) $ do
-      solve2 input [0..255] `shouldBe` "7f94112db4e32e19cf6502073c66f9bb"
+      solve2 input [0 .. 255] `shouldBe` "7f94112db4e32e19cf6502073c66f9bb"

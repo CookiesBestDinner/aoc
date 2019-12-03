@@ -23,7 +23,7 @@ spec = do
   it "part1 example" $ do
     let res = part1 ex
     res `shouldBe` Right 6
-  input <- runIO $ readFile "data/input/day12"
+  input <- runIO $ readFile "input/day12"
   it "input part 1" $ do
     part1 input `shouldBe` Right 288
   it "input part 2" $ do

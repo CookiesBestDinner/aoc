@@ -16,7 +16,7 @@ spec = do
     forM_ p1Examples $ \(input, output) -> do
       it input $ do
         part1 (T.pack input) `shouldBe` (Right output)
-  biginput <- runIO $ readFile "data/input/day11"
+  biginput <- runIO $ readFile "input/day11"
   it "input" $ do
     part1 biginput `shouldBe` Right 743
   it "part2" $ do

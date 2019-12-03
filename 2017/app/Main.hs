@@ -11,6 +11,7 @@ import qualified Day14
 import qualified Day15
 import qualified Day16
 import qualified Day17
+import qualified Day18
 import           Prelude   (error)
 import           Protolude
 
@@ -24,4 +25,5 @@ main = do
     ["15"] -> Day15.main
     ["16"] -> Day16.main
     ["17"] -> Day17.main
+    ["18"] -> Day18.main
     _      -> error "I'm not aware of that day."

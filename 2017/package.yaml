@@ -22,6 +22,7 @@ dependencies:
   - containers
   - extra
   - hspec
+  - lens
   - megaparsec
   - mtl
   - pretty-show

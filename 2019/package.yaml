@@ -9,6 +9,7 @@ dependencies:
   - base
   - bytestring
   - containers
+  - criterion
   - extra
   - hashable
   - hspec

@@ -25,13 +25,11 @@ main input = do
 digits :: Int -> [Int]
 digits = reverse . go
  where
-  go :: Int -> [Int]
-  go 0 = [0]
   go n | n < 10    = [n]
        | otherwise = n `mod` 10 : go (n `div` 10)
 
 hasDouble :: Eq a => [a] -> Bool
-hasDouble = group >>> any (length >>> (== 2))
+hasDouble = group >>> map length >>> any (== 2)
 
 hasAdjacent :: Eq a => [a] -> Bool
 hasAdjacent (a : b : xs) | a == b    = True

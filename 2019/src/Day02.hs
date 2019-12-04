@@ -5,12 +5,13 @@ module Day02 where
 
 import qualified Data.Map.Strict               as Map
 import qualified Data.Text                     as T
-import           Prelude                                  ( read )
+import           Prelude                                  ( read
+                                                          , error
+                                                          )
 import           Protolude
 
-main :: IO ()
-main = do
-  input <- getContents
+main :: Text -> IO ()
+main input = do
   let xs :: [Int] = input & T.unpack & (\s -> "[" ++ s ++ "]") & read
   let initialMem  = Map.fromList $ zip [0 ..] xs
   let mkComp a b = Comp 0 (initialMem & Map.insert 1 a & Map.insert 2 b)
@@ -40,7 +41,9 @@ step c@(Comp p m) = case i of
   1  -> Right $ Comp (p + 4) (Map.insert o (a + b) m)
   2  -> Right $ Comp (p + 4) (Map.insert o (a * b) m)
   99 -> Left c
+  _  -> error "bad instruction"
  where
-  [i, a', b', o] = [ m Map.! n | n <- [p .. p + 3] ]
-  a              = m Map.! a'
-  b              = m Map.! b'
+  i = m Map.! p
+  a = m Map.! (m Map.! (p + 1))
+  b = m Map.! (m Map.! (p + 2))
+  o = m Map.! (p + 3)

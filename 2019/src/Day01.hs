@@ -2,11 +2,11 @@ module Day01 where
 
 import           Data.Function ((&))
 import           Data.Functor  ((<&>))
+import qualified Data.Text as Text
 
-main :: IO ()
-main = do
-  input <- getContents
-  let nums = input & words <&> read
+main :: Text.Text -> IO ()
+main input = do
+  let nums = input & Text.unpack & words <&> read
   let mass = nums <&> fuelForMass & sum
   print mass
   nums <&> fuelForFuel & sum & print

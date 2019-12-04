@@ -3,7 +3,7 @@
 
 module Main where
 
-import           Prelude   (error)
+import           Prelude                                  ( error )
 import           Protolude
 
 import qualified Day01
@@ -33,31 +33,34 @@ import qualified Day03
 -- import qualified Day25
 main :: IO ()
 main = do
-  args <- getArgs
-  case args of
-    ["1"] -> Day01.main
-    ["2"] -> Day02.main
-    ["3"] -> Day03.main
-    -- ["4"] -> Day04.main
-    -- ["5"] -> Day05.main
-    -- ["6"] -> Day06.main
-    -- ["7"] -> Day07.main
-    -- ["8"] -> Day08.main
-    -- ["9"] -> Day09.main
-    -- ["10"] -> Day10.main
-    -- ["11"] -> Day11.main
-    -- ["12"] -> Day12.main
-    -- ["13"] -> Day13.main
-    -- ["14"] -> Day14.main
-    -- ["15"] -> Day15.main
-    -- ["16"] -> Day16.main
-    -- ["17"] -> Day17.main
-    -- ["18"] -> Day18.main
-    -- ["19"] -> Day19.main
-    -- ["20"] -> Day20.main
-    -- ["21"] -> Day21.main
-    -- ["22"] -> Day22.main
-    -- ["23"] -> Day23.main
-    -- ["24"] -> Day24.main
-    -- ["25"] -> Day25.main
+  args  <- getArgs
+  input <- case args `atMay` 1 of
+    Nothing       -> getContents
+    Just filename -> readFile filename
+  case take 1 args of
+    ["1"] -> Day01.main input
+    ["2"] -> Day02.main input
+    ["3"] -> Day03.main input
+    -- ["4"] -> Day04.main input
+    -- ["5"] -> Day05.main input
+    -- ["6"] -> Day06.main input
+    -- ["7"] -> Day07.main input
+    -- ["8"] -> Day08.main input
+    -- ["9"] -> Day09.main input
+    -- ["10"] -> Day10.main input
+    -- ["11"] -> Day11.main input
+    -- ["12"] -> Day12.main input
+    -- ["13"] -> Day13.main input
+    -- ["14"] -> Day14.main input
+    -- ["15"] -> Day15.main input
+    -- ["16"] -> Day16.main input
+    -- ["17"] -> Day17.main input
+    -- ["18"] -> Day18.main input
+    -- ["19"] -> Day19.main input
+    -- ["20"] -> Day20.main input
+    -- ["21"] -> Day21.main input
+    -- ["22"] -> Day22.main input
+    -- ["23"] -> Day23.main input
+    -- ["24"] -> Day24.main input
+    -- ["25"] -> Day25.main input
     _     -> error "I'm not aware of that day."

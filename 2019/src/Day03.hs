@@ -1,5 +1,5 @@
-{-# LANGUAGE NoImplicitPrelude   #-}
-{-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Day03 where
 
@@ -11,19 +11,18 @@ import           Protolude
 import           Text.Megaparsec
 import           Text.Megaparsec.Char.Lexer
 
-main :: IO ()
-main = do
-  [a', b'] <- T.lines <$> readFile "input/day03"
-  -- [a', b'] <- T.lines <$> readFile "input/day03ex1"
-  -- [a', b'] <- T.lines <$> readFile "input/day03ex2"
-  a        <- parseLine a'
-  b        <- parseLine b'
-  let aTour        = walk (0, 0) a
-  let bTour        = walk (0, 0) b
+main :: Text -> IO ()
+main input = do
+  let [a', b'] = T.lines input
+  a <- parseLine a'
+  b <- parseLine b'
+  let aTour  = walk (0, 0) a
+  let bTour  = walk (0, 0) b
   let common = Set.fromList aTour `Set.intersection` Set.fromList bTour
   common & Set.elems <&> manhattan & minimum & print
   -- part2
-  let mkStepDistMap tour = Map.fromListWith (flip const) (zip tour [1 ..])
+  let mkStepDistMap tour =
+        Map.fromListWith (flip const) (zip tour [1 :: Integer ..])
       sdma = mkStepDistMap aTour
       sdmb = mkStepDistMap bTour
   let totalSteps wh = sdma Map.! wh + sdmb Map.! wh

@@ -9,7 +9,7 @@ import           Protolude
 import qualified Day01
 import qualified Day02
 import qualified Day03
--- import qualified Day04
+import qualified Day04
 -- import qualified Day05
 -- import qualified Day06
 -- import qualified Day07
@@ -41,7 +41,7 @@ main = do
     ["1"] -> Day01.main input
     ["2"] -> Day02.main input
     ["3"] -> Day03.main input
-    -- ["4"] -> Day04.main input
+    ["4"] -> Day04.main input
     -- ["5"] -> Day05.main input
     -- ["6"] -> Day06.main input
     -- ["7"] -> Day07.main input
@@ -64,3 +64,7 @@ main = do
     -- ["24"] -> Day24.main input
     -- ["25"] -> Day25.main input
     _     -> error "I'm not aware of that day."
+
+
+mainmain :: IO ()
+mainmain = main

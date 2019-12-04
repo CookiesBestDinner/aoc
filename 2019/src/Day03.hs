@@ -7,7 +7,7 @@ import           Data.List                                ( last )
 import qualified Data.Map.Strict               as Map
 import qualified Data.Set                      as Set
 import qualified Data.Text                     as T
-import Prelude ((!!))
+import           Prelude                                  ( (!!) )
 import           Protolude
 import           Text.Megaparsec
 import           Text.Megaparsec.Char.Lexer

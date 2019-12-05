@@ -13,6 +13,7 @@ dependencies:
   - extra
   - hashable
   - hspec
+  - lens
   - megaparsec
   - mtl
   - pretty-show

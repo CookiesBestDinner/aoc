@@ -23,6 +23,8 @@ dependencies:
 - bytestring
 - containers
 - cryptonite
+- cryptohash-md5
+- base16-bytestring
 - extra
 - hashable
 - megaparsec
@@ -54,6 +56,8 @@ ghc-options:
 - -Wredundant-constraints
 - -rtsopts
 - -O2
+
+- -fno-warn-unused-do-bind
 
 executables:
   d1:
@@ -95,9 +99,9 @@ executables:
   # d13:
   #   main: Main.hs
   #   source-dirs: ./13
-  # d14:
-  #   main: Main.hs
-  #   source-dirs: ./14
+  d14:
+    main: Main.hs
+    source-dirs: ./14
   # d15:
   #   main: Main.hs
   #   source-dirs: ./15

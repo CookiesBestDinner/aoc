@@ -65,7 +65,6 @@ step comp = (if i == 99 then Nothing else Just comp) <&> case i of
  where
   lookup loc = comp ^?! (mem . ix loc)
   (i, ma, mb, mc) = decodeOp (lookup p)
-  !assertop = validOpCode (i, ma, mb, mc)
   p               = comp ^. pc
   a               = lookup (p + 1)
   b               = lookup (p + 2)
@@ -73,11 +72,3 @@ step comp = (if i == 99 then Nothing else Just comp) <&> case i of
   ra              = if ma == 0 then lookup a else a
   rb              = if mb == 0 then lookup b else b
   _rc             = if mc == 0 then lookup c else c
-
-validOpCode op@(i, ma, mb, mc)
-  | i `elem` [1,2,7,8] && ma `elem` [0,1] && mb `elem` [0,1] && mc == 0 = ()
-  | i == 3 && ma == 0 = ()
-  | i == 4 && ma `elem` [0,1] = ()
-  | i `elem` [5,6] && ma `elem` [0,1] && mb `elem` [0,1] = ()
-  | i == 99 = ()
-  | otherwise = panic $ "bad op: " <> show op

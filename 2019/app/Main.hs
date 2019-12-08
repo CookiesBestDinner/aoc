@@ -14,7 +14,7 @@ import qualified Day04
 import qualified Day05
 import qualified Day06
 import qualified Day07
--- import qualified Day08
+import qualified Day08
 -- import qualified Day09
 -- import qualified Day10
 -- import qualified Day11
@@ -51,7 +51,7 @@ main = do
         ["5"] -> Day05.main input
         ["6"] -> Day06.main input
         ["7"] -> Day07.main input
-        -- ["8"] -> Day08.main input
+        ["8"] -> Day08.main input
         -- ["9"] -> Day09.main input
         -- ["10"] -> Day10.main input
         -- ["11"] -> Day11.main input

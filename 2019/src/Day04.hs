@@ -10,11 +10,17 @@ import           Common
 
 import           Protolude
 import           Control.Arrow
-import           Text.Megaparsec.Char.Lexer
+import           Text.Megaparsec.Char (space)
+import           Text.Megaparsec.Char.Lexer (decimal)
 
 pInput :: Parser (Int, Int)
-pInput = (,) <$> decimal <* "-" <*> decimal
+pInput = (,) <$> decimal <* "-" <*> decimal <* space
 
+
+-- |
+-- >>> readFile "input/day04" >>= main
+-- 2150
+-- 1462
 main :: Text -> IO ()
 main input = do
   (lo, hi) <- executeParser pInput input

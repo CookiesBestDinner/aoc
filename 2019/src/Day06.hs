@@ -23,8 +23,13 @@ pOrbit = do
   return (a, b)
 
 pOrbits :: Parser [(Text, Text)]
-pOrbits = pOrbit `sepEndBy1` eol <* eof
+pOrbits = pOrbit `sepEndBy1` eol
 
+
+-- |
+-- >>> readFile "input/day06" >>= main
+-- 402879
+-- Just 484
 main :: Text -> IO ()
 main indata = do
   input <- executeParser pOrbits indata

@@ -51,7 +51,13 @@ library:
   source-dirs:
     - src
 
-# tests:
+tests:
+  doctest:
+    main: RunDocTests.hs
+    source-dirs: test
+    dependencies:
+      - doctest
+      - aoc2019
 #   hspecdiscover:
 #     main: Spec.hs
 #     source-dirs: test

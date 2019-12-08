@@ -12,6 +12,10 @@ import           Protolude
 import           Text.Megaparsec
 import           Text.Megaparsec.Char.Lexer
 
+-- |
+-- >>> readFile "input/day03" >>= main
+-- 1519
+-- 14358
 main :: Text -> IO ()
 main input = do
   let lns = T.lines input

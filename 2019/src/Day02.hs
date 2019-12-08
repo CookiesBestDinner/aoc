@@ -10,6 +10,10 @@ import           Prelude                                  ( read
                                                           )
 import           Protolude
 
+-- |
+-- >>> readFile "input/day02" >>= main
+-- 7594646
+-- [3376]
 main :: Text -> IO ()
 main input = do
   let xs :: [Int] = input & T.unpack & (\s -> "[" ++ s ++ "]") & read

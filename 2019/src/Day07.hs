@@ -11,12 +11,15 @@ import           Common
 
 import           Control.Arrow
 import           Control.Lens
-import           Data.List                      ( (!!) )
+import           Data.List                                ( (!!) )
 import qualified Data.Map                      as MapL
 import qualified Data.Map.Strict               as Map
-import           Protolude               hiding ( zero )
+import           Protolude                         hiding ( zero )
 import           Text.Megaparsec
-import           Text.Megaparsec.Char.Lexer
+import           Text.Megaparsec.Char                     ( space )
+import           Text.Megaparsec.Char.Lexer               ( decimal
+                                                          , signed
+                                                          )
 
 data Comp =
   Comp
@@ -28,8 +31,12 @@ data Comp =
 makeLenses ''Comp
 
 pInput :: Parser [Int]
-pInput = signed (pure ()) decimal `sepBy1` ","
+pInput = signed (pure ()) decimal `sepBy1` "," <* space
 
+-- |
+-- >>> readFile "input/day07" >>= main
+-- Just 116680
+-- Just 89603079
 main :: Text -> IO ()
 main indata = do
   program <- executeParser pInput indata

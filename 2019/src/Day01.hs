@@ -2,8 +2,12 @@ module Day01 where
 
 import           Data.Function ((&))
 import           Data.Functor  ((<&>))
-import qualified Data.Text as Text
+import qualified Data.Text     as Text
 
+-- |
+-- >>> readFile "input/day01" >>= (main . Text.pack)
+-- 3339288
+-- 5006064
 main :: Text.Text -> IO ()
 main input = do
   let nums = input & Text.unpack & words <&> read

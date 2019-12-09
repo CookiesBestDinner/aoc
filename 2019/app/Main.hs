@@ -71,6 +71,3 @@ main = do
         -- ["25"] -> Day25.main input
         _     -> putText "I'm not aware of that day." >> exitFailure
   run action
-
-mainmain :: IO ()
-mainmain = main

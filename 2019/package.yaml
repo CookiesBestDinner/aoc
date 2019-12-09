@@ -50,6 +50,7 @@ executables:
 library:
   source-dirs:
     - src
+    - app
 
 tests:
   doctest:

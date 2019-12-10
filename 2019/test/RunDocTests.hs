@@ -13,4 +13,5 @@ main = do
     , "src/Day07.hs"
     , "src/Day08.hs"
     , "src/Day09.hs"
+    , "src/Day10.hs"
     ]

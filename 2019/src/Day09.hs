@@ -2,10 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
 
-module Day09
-  ( main
-  )
-where
+module Day09 where
 
 import           Common
 

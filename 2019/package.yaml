@@ -42,7 +42,6 @@ ghc-options:
 executables:
   main:
     main: Main.hs
-    source-dirs: app
     dependencies: aoc2019
     ghc-options:
       - -rtsopts

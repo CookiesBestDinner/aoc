@@ -2,9 +2,13 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
 
-module Day11 where
+module Day11
+  ( main
+  )
+where
 
 import           Common                                   ( executeParser )
+import           Control.Arrow                            ( (&&&) )
 import           Control.Lens
 import qualified Data.Map.Strict               as Map
 import           Day09                                    ( Comp(..)
@@ -12,11 +16,6 @@ import           Day09                                    ( Comp(..)
                                                           , run
                                                           )
 import           Protolude
-
-data Color
-  = B
-  | W
-  deriving (Eq, Show)
 
 type Panels = Map.Map (Int, Int) Int
 
@@ -29,11 +28,12 @@ data Robot =
 
 makeLenses ''Robot
 
-white :: Int
-white = 1
+white, black :: Int
+(white, black) = (1, 0)
 
-black :: Int
-black = 0
+left, right :: (Int, Int) -> (Int, Int)
+right (x, y) = (y, -x)
+left (x, y) = (-y, x)
 
 -- |
 -- >>> readFile "input/day11" >>= main
@@ -49,17 +49,15 @@ main indata = do
   program <- executeParser pInput indata
   let initialMem = Map.fromList $ zip [0 ..] program
   let brain      = Comp 0 0 initialMem
-  let robot = Robot (0, 1) (0, 0) (Map.fromList [((0, 0), white)])
+  let robot      = Robot (0, 1) (0, 0) Map.empty
   let go startColor =
         let brainOut = run brain (startColor : (fst <$> robotOut))
             robotOut = runRobot robot brainOut
         in  lastDef Map.empty (snd <$> robotOut)
   go black & Map.size & print
-  let painted = go white
-  let maxY    = painted & Map.keys <&> snd & maximum
-  let minY    = painted & Map.keys <&> snd & minimum
-  let maxX    = painted & Map.keys <&> fst & maximum
-  let minX    = painted & Map.keys <&> fst & minimum
+  let painted      = go white
+  let (minX, maxX) = painted & Map.keys <&> fst & (minimum &&& maximum)
+  let (minY, maxY) = painted & Map.keys <&> snd & (minimum &&& maximum)
   [ [ if color == white then '█' else '.'
     | x <- [minX .. maxX]
     , let color = Map.findWithDefault black (x, y) painted
@@ -81,17 +79,3 @@ runRobot robot (color : turn : rest) =
   nextRobot    = robot & paint & steer & drive
   continue     = runRobot nextRobot rest
 runRobot _ _ = []
-
-left :: (Int, Int) -> (Int, Int)
-left (0 , 1 ) = (-1, 0)
-left (-1, 0 ) = (0, -1)
-left (0 , -1) = (1, 0)
-left (1 , 0 ) = (0, 1)
-left _        = panic "woof?"
-
-right :: (Int, Int) -> (Int, Int)
-right (-1, 0 ) = (0, 1)
-right (0 , -1) = (-1, 0)
-right (1 , 0 ) = (0, -1)
-right (0 , 1 ) = (1, 0)
-right _        = panic "meow?"

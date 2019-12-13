@@ -13,7 +13,7 @@ import           System.IO                      ( hSetBuffering
                                                 )
 import qualified Data.Map.Strict               as Map
 import           Control.Lens
-import           Control.Arrow                  ( (&&&) )
+import           Control.Arrow
 import           Data.List.Extra                ( chunksOf )
 import qualified Prelude
 import           Day09                          ( Comp(Comp)
@@ -47,9 +47,9 @@ main indata = do
           &   catMaybes
   let vmOutput = run (insertQuarters game) gameInputs
   drawFrames vmOutput
+  hClose stdin
   putStr "Part 1 was: "
   canvas & Map.elems & filter (== 2) & length & print
-  hClose stdin
   putStrLn "keyboard inputs of this session:"
   mapM_ putStr ((: []) <$> joystick)
 
@@ -58,12 +58,10 @@ drawFrames = go 0 Map.empty
  where
   go :: Int -> Map.Map (Int, Int) Int -> [Int] -> IO ()
   go score canvas (x : y : t : rest) = do
-    let canvas' | (x, y) == (-1, 0) = canvas
-                | otherwise         = Map.insert (x, y) t canvas
-    let score' | (x, y) == (-1, 0) = t
-               | otherwise         = score
+    let (score', canvas') | (x, y) == (-1, 0) = (t, canvas)
+                          | otherwise = (score, Map.insert (x, y) t canvas)
     drawCanvas canvas'
-    putStrLn $ "Score: " <> show score
+    putStrLn $ "Score: " <> show score'
     go score' canvas' rest
   go _ _ _ = return ()
 
@@ -79,7 +77,7 @@ drawCanvas canvas = rows & mapM_ putStrLn
       ]
     | y <- [loy .. hiy]
     ]
-  getTile n = case n of
+  getTile = \case
     0 -> ' '
     1 -> '█'
     2 -> '#'

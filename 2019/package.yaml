@@ -8,6 +8,7 @@ dependencies:
   - attoparsec
   - base
   - bytestring
+  - conduit
   - containers
   - criterion
   - extra

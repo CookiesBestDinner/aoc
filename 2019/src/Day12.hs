@@ -50,10 +50,9 @@ doTheThing moons = do
           , cmp (self ^. z) (other ^. z)
           )
   let applyG = dx %~ (+ gx) >>> dy %~ (+ gy) >>> dz %~ (+ gz)
-  let self'  = applyG self
-  let add d c = c %~ (+ self' ^. d)
-  let self'' = self' & add dx x & add dy y & add dz z
-  return self''
+  let add d c s = (c %~ (+ s ^. d)) s
+  let applyV = add dx x >>> add dy y >>> add dz z
+  return $ self & applyG & applyV
 
 readEnergy :: Moon -> Int
 readEnergy = (*) <$> readKinetic <*> readPotential

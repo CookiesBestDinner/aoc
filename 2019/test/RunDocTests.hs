@@ -15,5 +15,5 @@ main = do
     , "src/Day09.hs"
     , "src/Day10.hs"
     , "src/Day11.hs"
-    , "src/Day12.hs"
+    -- , "src/Day12.hs"  -- slow without compiling
     ]

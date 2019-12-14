@@ -18,9 +18,9 @@ import           Text.Megaparsec.Char.Lexer               ( decimal
 
 data Comp =
   Comp
-    { _pc  :: Int
-    , _param :: Int
-    , _mem :: Map.Map Int Int
+    { _pc  :: !Int
+    , _param :: !Int
+    , _mem :: !(Map.Map Int Int)
     }
   deriving (Show)
 

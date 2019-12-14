@@ -53,7 +53,7 @@ run comp = do
   let lookup loc = fromMaybe 0 (comp ^? mem . ix loc)
       var o m = lookup (comp ^. pc + o) + if m == 2 then comp ^. param else 0
       (i, ma, mb, mc) = decodeOp (lookup (comp ^. pc))
-      (a, b, c)       = (var 0 ma, var 1 mb, var 2 mc)
+      (a, b, c)       = (var 1 ma, var 2 mb, var 3 mc)
       ra              = if ma == 1 then a else lookup a
       rb              = if mb == 1 then b else lookup b
   readInput <- if i == 3 then await else pure Nothing

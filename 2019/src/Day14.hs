@@ -1,90 +1,73 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NoImplicitPrelude   #-}
+{-# LANGUAGE NumericUnderscores #-}
+{-# LANGUAGE OverloadedStrings   #-}
 
 module Day14 where
 
 import           Common
-import           Intcode
 
-import           Conduit
-import           Control.Arrow
-import           Control.Lens
-import           Data.List.Extra                ( chunksOf )
 import qualified Data.Map.Strict               as Map
-import           Text.Show.Pretty
-import qualified Prelude
 import           Protolude
-import qualified Data.Text                     as T
-import           Text.Megaparsec (many, satisfy, sepBy1, sepEndBy1)
-import           Text.Megaparsec.Char           ( space
-                                                , eol
-                                                )
+import           Text.Megaparsec         hiding ( State(..) )
+import           Text.Megaparsec.Char
 import           Text.Megaparsec.Char.Lexer     ( decimal )
-import           System.IO                      ( BufferMode(NoBuffering)
-                                                , hSetBuffering
-                                                )
 
-pnsomething :: Parser (Int, Text)
-pnsomething = do
-  n <- decimal
-  space
-  name <- Text.Megaparsec.many (satisfy (`elem` ['A' .. 'Z']))
-  return (n, T.pack name)
+type Reaction = (Int, [(Int, Text)])
 
-preqs :: Parser [(Int, Text)]
-preqs = pnsomething `sepBy1` ", "
-
-parseInput :: Parser [(Text, (Int, [(Int, Text)]))]
-parseInput = (`sepEndBy1` eol) $ do
-  reqs <- preqs
-  " => "
-  (n, gives) <- pnsomething
-  return (gives, (n, reqs))
+parseInput :: Parser (Map Text Reaction)
+parseInput = Map.fromList <$> pLines
+ where
+  pLines = pLine `sepEndBy1` eol
+  pLine  = do
+    reqs <- pIngredients
+    " => "
+    (n, gives) <- pAmntName
+    return (gives, (n, reqs))
+  pIngredients = pAmntName `sepBy1` ", "
+  pAmntName    = do
+    n <- decimal
+    space
+    name <- takeWhile1P Nothing (`elem` ['A' .. 'Z'])
+    return (n, name)
 
 main :: Text -> IO ()
 main indata = do
-  reqs <- executeParser parseInput indata
-  let chart = Map.fromList reqs
-  let (c, s) = runState (fetch chart (1, "FUEL")) Map.empty
-  print c
-  -- got this number with manual binary search, fix later
-  let (c, s) = runState (fetch chart (4052920, "FUEL")) Map.empty
-  print c
-  let tril = 1000000000000
-  -- printing out whether over-shooting in my binary search
-  print (c - tril)
+  chart <- executeParser parseInput indata
+  let part1 = evalState (fetch chart (1, "FUEL")) Map.empty
+  print part1
+  let trillion = 1_000_000_000_000
+  let p x = evalState (fetch chart (x, "FUEL")) Map.empty & (<= trillion)
+  let lo = trillion `div` part1
+  let hi = findHighBound p lo
+  print $ findLargest p lo hi
 
-fetch :: (Map Text (Int, [(Int, Text)])) -> (Int, Text) -> State (Map.Map Text Int) Int
-fetch chart (n, "ORE") = pure n
+findLargest :: (Int -> Bool) -> Int -> Int -> Int
+findLargest p lo hi | lo + 1 == hi = lo
+                    | p mid        = findLargest p mid hi
+                    | otherwise    = findLargest p lo mid
+  where mid = (hi + lo) `div` 2
+
+findHighBound :: (Int -> Bool) -> Int -> Int
+findHighBound p low | p low     = findHighBound p (low * 2)
+                    | otherwise = low
+
+fetch :: Map Text Reaction -> (Int, Text) -> State (Map.Map Text Int) Int
+fetch _     (0, _    ) = pure 0
+fetch _     (n, "ORE") = pure n
 fetch chart (n, stuff) = do
-  inventory <- get
-  -- got stuff?
-  let got = Map.findWithDefault 0 stuff inventory
-  let excess = max 0 (got - n)
-  -- put the extra back (one can wish)
-  let putback = Map.insert stuff excess
-  put (putback inventory)
-  -- fetch the rest.
-  let rest = max 0 (n - got)
-  -- ...what do I need for that?
+  needThisMany <- do
+    inventory <- get
+    let got    = Map.findWithDefault 0 stuff inventory
+    let excess = max 0 (got - n)
+    put $ Map.insert stuff excess inventory
+    return $ max 0 (n - got)
   let (yieldAmnt, reqs) = chart Map.! stuff
-  let batchesToMake = rest `batchCount` yieldAmnt
-  let shoppingList = [ (reqN * batchesToMake, reqName)
-                     | (reqN, reqName) <- reqs
-                     ]
-  -- fetch each such bunch
+  let batchesToMake     = (needThisMany + yieldAmnt - 1) `div` yieldAmnt
+  let shoppingList = do
+        (reqN, reqName) <- reqs
+        return (reqN * batchesToMake, reqName)
   shoppingBill <- sum <$> mapM (fetch chart) shoppingList
-
-  -- oh and I made too many. how many?
-  let madeSomeExtra = batchesToMake * yieldAmnt - rest
-  -- .. put that back.
+  let spares = batchesToMake * yieldAmnt - needThisMany
   sack <- get
-  put $ Map.insertWith (+) stuff madeSomeExtra sack
-  -- here's what this adventure cost me
-  pure shoppingBill
-
-batchCount :: Int -> Int -> Int
-batchCount need size = fullBatches + oneMore
-  where
-    fullBatches = need `div` size
-    oneMore = fromEnum $ (need `mod` size) > 0
+  put $ Map.insertWith (+) stuff spares sack
+  return shoppingBill

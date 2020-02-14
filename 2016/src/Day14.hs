@@ -1,7 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Main where
+module Day14 where
 
 import           Control.Arrow
 import qualified Crypto.Hash                   as C

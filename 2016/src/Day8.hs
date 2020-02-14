@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-module Main where
+module Day8 where
 
 import           Protolude                         hiding ( rotate
                                                           , many

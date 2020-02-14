@@ -1,5 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
-module Main where
+module Day6 where
 
 import           Protolude
 import           Control.Arrow

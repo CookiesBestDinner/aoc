@@ -1,6 +1,6 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-module Main where
+module Day9 where
 
 import           Protolude                         hiding ( many )
 import           Prelude                                  ( error )

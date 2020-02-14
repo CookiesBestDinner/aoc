@@ -1,7 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-module Lib where
+module Day20 where
 import           Data.List                                ( delete )
 import           Protolude
 import           Text.Megaparsec

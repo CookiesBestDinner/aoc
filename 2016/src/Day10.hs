@@ -3,7 +3,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-module Main where
+module Day10 where
 
 import           Protolude                         hiding ( from
                                                           , many

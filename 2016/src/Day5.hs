@@ -1,6 +1,6 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Main where
+module Day5 where
 
 import           Control.Arrow
 import           Protolude                         hiding ( hash )

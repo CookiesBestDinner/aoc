@@ -1,7 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Main where
+module Day12 where
 
 import qualified Data.Map.Strict            as Map
 import           Protolude

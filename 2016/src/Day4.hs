@@ -1,6 +1,6 @@
 {-# LANGUAGE RecordWildCards #-}
 
-module Main where
+module Day4 where
 
 import           Control.Arrow
 import           Data.Char

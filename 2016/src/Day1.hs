@@ -1,4 +1,4 @@
-module Main where
+module Day1 where
 
 import           Data.List                                ( foldl'
                                                           , scanl'

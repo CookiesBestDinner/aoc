@@ -1,19 +1,10 @@
 name:                aoc2016
-
-# version:             0.1.0.0
-# github:              githubuser/myproject
-# license:             BSD3
-# author:              Author name here
-# maintainer:          example@example.com
-# copyright:           2019 Author name here
-
-# extra-source-files:
-# - README.md
-# - ChangeLog.md
-
-# Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
+version:             0.1.0.0
+github:              "githubuser/aoc2016"
+license:             BSD3
+author:              "Author name here"
+maintainer:          "example@example.com"
+copyright:           "2020 Author name here"
 
 dependencies:
 
@@ -39,99 +30,8 @@ dependencies:
 - text
 - unordered-containers
 
-# - shakespeare
-# - rio
-# - megaparsec
-# - flow
-# - stm
-# - mtl
-
 ghc-options:
-- -Wall
-- -Wcompat
-- -Widentities
-- -Wincomplete-record-updates
-- -Wincomplete-uni-patterns
-- -Wpartial-fields
-- -Wredundant-constraints
-- -rtsopts
-- -O2
+  - -Wall
 
-- -fno-warn-unused-do-bind
-
-executables:
-  d1:
-    main: Main.hs
-    source-dirs: ./1
-  d2:
-    main: Main.hs
-    source-dirs: ./2
-  d3:
-    main: Main.hs
-    source-dirs: ./3
-  d4:
-    main: Main.hs
-    source-dirs: ./4
-  d5:
-    main: Main.hs
-    source-dirs: ./5
-  d6:
-    main: Main.hs
-    source-dirs: ./6
-  d7:
-    main: Main.hs
-    source-dirs: ./7
-  d8:
-    main: Main.hs
-    source-dirs: ./8
-  d9:
-    main: Main.hs
-    source-dirs: ./9
-  d10:
-    main: Main.hs
-    source-dirs: ./10
-  # d11:
-  #   main: Main.hs
-  #   source-dirs: ./11
-  d12:
-    main: Main.hs
-    source-dirs: ./12
-  # d13:
-  #   main: Main.hs
-  #   source-dirs: ./13
-  d14:
-    main: Main.hs
-    source-dirs: ./14
-  # d15:
-  #   main: Main.hs
-  #   source-dirs: ./15
-  # d16:
-  #   main: Main.hs
-  #   source-dirs: ./16
-  # d17:
-  #   main: Main.hs
-  #   source-dirs: ./17
-  # d18:
-  #   main: Main.hs
-  #   source-dirs: ./18
-  # d19:
-  #   main: Main.hs
-  #   source-dirs: ./19
-  # d20:
-  #   main: Main.hs
-  #   source-dirs: ./20
-  # d21:
-  #   main: Main.hs
-  #   source-dirs: ./21
-  # d22:
-  #   main: Main.hs
-  #   source-dirs: ./22
-  # d23:
-  #   main: Main.hs
-  #   source-dirs: ./23
-  # d24:
-  #   main: Main.hs
-  #   source-dirs: ./24
-  # d25:
-  #   main: Main.hs
-  #   source-dirs: ./25
+library:
+  source-dirs: src

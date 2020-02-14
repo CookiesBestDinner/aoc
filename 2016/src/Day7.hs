@@ -1,7 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Main where
+module Day7 where
 
 import           Protolude
 import           Data.Attoparsec.Text

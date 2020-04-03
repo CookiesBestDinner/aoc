@@ -6,32 +6,50 @@ author:              "Author name here"
 maintainer:          "example@example.com"
 copyright:           "2020 Author name here"
 
+executables:
+  main:
+    main: src/Main.hs
+    dependencies: aoc2016
+    ghc-options:
+      - -rtsopts
+      - -O2
+
 dependencies:
 
 - aeson
 - attoparsec
 - base
+- base16-bytestring
 - bytestring
 - containers
-- cryptonite
 - cryptohash-md5
-- base16-bytestring
+- cryptonite
 - extra
 - hashable
+- hashtables
 - megaparsec
 - memory
+- monad-loops
 - pretty-show
 - protolude
-- relude
+# - relude
 - replace-attoparsec
 - safe
 - scientific
 - split
 - text
 - unordered-containers
+- vector
 
 ghc-options:
   - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wpartial-fields
+  - -Wredundant-constraints
+  - -fno-warn-unused-do-bind
 
 library:
   source-dirs: src

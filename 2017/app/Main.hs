@@ -13,13 +13,13 @@ import qualified Day16
 import qualified Day17
 import qualified Day18
 import qualified Day22
+import qualified Day23
 import           Prelude                                  ( error )
 import           Protolude
 import           System.Environment                       ( withArgs )
 
 main :: IO ()
 main = do
-  putText "uhm. hi?"
   args <- getArgs
   withArgs (drop 1 args) $ case take 1 args of
     ["12"] -> Day12.main
@@ -30,4 +30,5 @@ main = do
     ["17"] -> Day17.main
     ["18"] -> Day18.main
     ["22"] -> Day22.main
+    ["23"] -> Day23.main
     _      -> error "I'm not aware of that day."

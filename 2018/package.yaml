@@ -8,6 +8,12 @@ dependencies:
   - attoparsec
   - text
 
+  - protolude
+  - megaparsec
+  - lens
+  - extra
+  - pretty-simple
+
 ghc-options:
   - -O2
   - -Wall
@@ -15,13 +21,19 @@ ghc-options:
 default-extensions:
   - OverloadedStrings
 
+# uhm so I confused ghcide by having multiple executables and it seems
+# generally nicer in general to have a Main with a switch in it for what to
+# start. But I don't have that yet so... I'll just leave this as a mess!
 executables:
-  3:
+  # 3:
+  #   main: main.hs
+  #   source-dirs: '3'
+  # 7:
+  #   main: main.hs
+  #   source-dirs: '7'
+  # 1:
+  #   main: main.hs
+  #   source-dirs: '1'
+  24:
     main: main.hs
-    source-dirs: '3'
-  7:
-    main: main.hs
-    source-dirs: '7'
-  1:
-    main: main.hs
-    source-dirs: '1'
+    source-dirs: '24'

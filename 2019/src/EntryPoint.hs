@@ -29,7 +29,7 @@ import qualified Day17
 -- import qualified Day20
 -- import qualified Day21
 import qualified Day22
--- import qualified Day23
+import qualified Day23
 -- import qualified Day24
 -- import qualified Day25
 
@@ -66,7 +66,7 @@ main = do
         -- ["20"] -> Day20.main input
         -- ["21"] -> Day21.main input
         ["22"] -> Day22.main input
-        -- ["23"] -> Day23.main input
+        ["23"] -> Day23.main input
         -- ["24"] -> Day24.main input
         -- ["25"] -> Day25.main input
         _     -> putText "I'm not aware of that day." >> exitFailure

@@ -25,6 +25,7 @@ dependencies:
   - safe
   - scientific
   - split
+  - stm
   - text
   - unordered-containers
   - vector

@@ -11,8 +11,44 @@ import           Protolude
 
 main :: Text -> IO ()
 main input = do
-  let (meep, begin, end) = readGrid input
+  let (meep, begin, end, outers) = readGrid input
   print $ bfs meep (Set.singleton begin) mempty 0 end
+  -- part2
+  let (y, x)   = begin
+  let (ey, ex) = end
+  print $ bfs2 meep outers (Set.singleton (0, y, x)) mempty 0 (0, ey, ex)
+
+
+bfs2
+  :: Map (Int, Int) [(Int, Int)]
+  -> Set (Int, Int)
+  -> Set (Int, Int, Int)
+  -> Set (Int, Int, Int)
+  -> Int
+  -> (Int, Int, Int)
+  -> Int
+bfs2 meep outers heres seen steps end
+  | end `elem` heres = steps
+  | Set.null can_go_to = panic "nothing more to search"
+  | otherwise = bfs2 meep
+                     outers
+                     can_go_to
+                     (Set.union seen can_go_to)
+                     (steps + 1)
+                     end
+ where
+  can_go_to = Set.fromList $ do
+    (z, y, x) <- Set.toList heres
+    (ty, tx)  <- meep Map.! (y, x)
+    -- it's a portal jump if not adjacent
+    let dz | abs (y - ty) + abs (x - tx) == 1 = 0
+           | (y, x) `Set.member` outers       = -1
+           | otherwise                        = 1
+        tz = z + dz
+    -- can't go outside the outermost level
+    guard $ tz >= 0
+    guard $ (tz, ty, tx) `Set.notMember` seen
+    pure (tz, ty, tx)
 
 
 bfs :: (Ord k) => Map k [k] -> Set k -> Set k -> Int -> k -> Int
@@ -27,8 +63,14 @@ bfs meep heres seen steps end
     pure there
 
 
-readGrid :: Text -> (Map.Map (Int, Int) [(Int, Int)], (Int, Int), (Int, Int))
-readGrid t = (dotsWithPortals, start, end) where
+readGrid
+  :: Text
+  -> ( Map.Map (Int, Int) [(Int, Int)]
+     , (Int, Int)
+     , (Int, Int)
+     , Set (Int, Int)
+     )
+readGrid t = (dotsWithPortals, start, end, outers) where
   grid = Map.fromList $ do
     (y, row ) <- zip [0 ..] (lines t)
     (x, cell) <- zip [0 ..] (toS row)
@@ -62,3 +104,8 @@ readGrid t = (dotsWithPortals, start, end) where
   dotsWithPortals = foldl' insertPortal dots portals
   start           = headDef (panic "eek") $ portals Map.! "AA"
   end             = headDef (panic "eek") $ portals Map.! "ZZ"
+  height          = length (lines t)
+  width           = 1 + (grid & Map.keys <&> snd & maximum)
+  -- outer is a dot 3 from the edge in any direction
+  is_outer (y, x) = y == 2 || y == height - 3 || x == 2 || x == width - 3
+  outers = dots & Map.keys & filter is_outer & Set.fromList

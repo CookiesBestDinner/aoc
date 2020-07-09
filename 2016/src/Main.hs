@@ -8,6 +8,7 @@ import qualified Day16
 import qualified Day18
 import qualified Day19
 import qualified Day21
+import qualified Day23
 import           Protolude
 
 main :: IO ()
@@ -18,4 +19,5 @@ main = getArgs >>= \case
   ["18"] -> Day18.main
   ["19"] -> Day19.main
   ["21"] -> Day21.main
+  ["23"] -> Day23.main
   _      -> putStrLn "I don't know anything about that day." >> exitFailure

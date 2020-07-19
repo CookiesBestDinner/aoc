@@ -5,6 +5,7 @@ module Main where
 import qualified Day13
 import qualified Day15
 import qualified Day16
+import qualified Day17
 import qualified Day18
 import qualified Day19
 import qualified Day21
@@ -16,6 +17,7 @@ main = getArgs >>= \case
   ["13"] -> Day13.main
   ["15"] -> Day15.main
   ["16"] -> Day16.main
+  ["17"] -> Day17.main
   ["18"] -> Day18.main
   ["19"] -> Day19.main
   ["21"] -> Day21.main

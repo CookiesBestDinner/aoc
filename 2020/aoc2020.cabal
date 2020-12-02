@@ -9,6 +9,7 @@ executable aoc2020
   main-is:            Main.hs
   other-modules:
     Day01
+    Day02
     Parsing
 
   build-depends:
@@ -29,6 +30,7 @@ executable aoc2020
     MultiWayIf
     NumericUnderscores
     OverloadedStrings
+    RecordWildCards
     QuasiQuotes
     ScopedTypeVariables
 

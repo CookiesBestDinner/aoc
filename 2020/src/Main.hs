@@ -1,5 +1,6 @@
 module Main where
 
+import           Criterion
 import           Protolude
 import           System.Environment
 
@@ -9,12 +10,14 @@ import qualified Day02
 main :: IO ()
 main = do
   args <- getArgs
-  let execArgs = takeWhile (/= "--") args
+  let execArgs = takeWhile (/= "--") args & dropWhile (== "bench")
       dayArgs  = drop 1 $ dropWhile (/= "--") args
   let input = case execArgs `atMay` 1 of
         Nothing       -> readFile $ mconcat $ "input/" : take 1 execArgs
         Just "-"      -> getContents
         Just filename -> readFile filename
-  withArgs dayArgs $ case take 1 execArgs of
+  let run a | take 1 args == ["bench"] = benchmark (nfIO a)
+            | otherwise                       = a
+  run $ withArgs dayArgs $ case take 1 execArgs of
     ["01"] -> Day01.main =<< input
     ["02"] -> Day02.main =<< input

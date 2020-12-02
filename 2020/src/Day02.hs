@@ -1,9 +1,8 @@
-{-# LANGUAGE RecordWildCards #-}
 module Day02 where
 
-import           Protolude
+import           Data.Ix         (inRange)
+import           Protolude       hiding (many)
 import           Text.Megaparsec
-import           Text.Megaparsec.Char
 
 import           Parsing
 
@@ -17,32 +16,28 @@ data Password
   deriving (Show)
 
 pwParser :: Parser Password
-pwParser = do
-  lo <- number
-  "-"
-  hi <- number
-  space
-  ch <- anySingle
-  ":"
-  space
-  str <- toS <$> takeWhileP Nothing (/= '\n')
-  pure $ Password { .. }
+pwParser =
+  Password
+    <$> number
+    <*  "-"
+    <*> number
+    <*  " "
+    <*> anySingle
+    <*  ": "
+    <*> restOfLine
 
 valid :: Password -> Bool
-valid password = inrange
- where
-  count :: Int = filter (== ch password) (str password) & length
-  inrange      = count >= lo password && count <= hi password
+valid password = inRange (lo password, hi password) matchcount
+  where matchcount = filter (== ch password) (str password) & length
 
 validpart2 :: Password -> Bool
-validpart2 password = ab == expect
+validpart2 password = matchAt lo /= matchAt hi
  where
-  get n = take n (str password) & drop (n - 1) & filter (== ch password)
-  ab     = sort [get (lo password), get (hi password)]
-  expect = [[], [ch password]]
+  matchAt (($password) -> n) =
+    str password & take n & drop (n - 1) & (== [ch password])
 
 main :: Text -> IO ()
 main input = do
-  passwords <- parse' (pwParser `sepEndBy1` space) input
+  passwords <- parse' (many pwParser <* eof) input
   print $ filter valid passwords & length
   print $ filter validpart2 passwords & length

@@ -6,6 +6,7 @@ import           System.Environment
 
 import qualified Day01
 import qualified Day02
+import qualified Day03
 
 main :: IO ()
 main = do
@@ -21,3 +22,4 @@ main = do
   run $ withArgs dayArgs $ case take 1 execArgs of
     ["01"] -> Day01.main =<< input
     ["02"] -> Day02.main =<< input
+    ["03"] -> Day03.main =<< input

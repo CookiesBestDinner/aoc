@@ -10,6 +10,7 @@ executable aoc2020
   other-modules:
     Day01
     Day02
+    Day03
     Parsing
 
   build-depends:
@@ -27,10 +28,11 @@ executable aoc2020
     , vector                  ^>=0.12.1
 
   default-extensions:
-    NoImplicitPrelude
     BangPatterns
+    BlockArguments
     LambdaCase
     MultiWayIf
+    NoImplicitPrelude
     NumericUnderscores
     OverloadedStrings
     QuasiQuotes

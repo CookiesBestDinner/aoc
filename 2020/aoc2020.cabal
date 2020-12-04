@@ -11,6 +11,7 @@ executable aoc2020
     Day01
     Day02
     Day03
+    Day04
     Parsing
 
   build-depends:

@@ -15,6 +15,7 @@ import qualified Day18
 import qualified Day22
 import qualified Day23
 import qualified Day24
+import qualified Day25
 import           Prelude                                  ( error )
 import           Protolude
 import           System.Environment                       ( withArgs )
@@ -33,4 +34,5 @@ main = do
     ["22"] -> Day22.main
     ["23"] -> Day23.main
     ["24"] -> Day24.main
+    ["25"] -> Day25.main
     _      -> error "I'm not aware of that day."

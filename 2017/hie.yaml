@@ -1,0 +1,10 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "aoc2017:lib"
+
+    - path: "./app"
+      component: "aoc2017:exe:main"
+
+    - path: "./test"
+      component: "aoc2017:test:hspecdiscover"

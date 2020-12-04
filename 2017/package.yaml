@@ -4,7 +4,6 @@ author: jonatan
 
 library:
   source-dirs:
-    - .
     - src
 
 tests:
@@ -40,9 +39,9 @@ ghc-options:
 - -Wincomplete-uni-patterns
 - -Wpartial-fields
 - -Wredundant-constraints
-- -fno-warn-unused-do-bind
+- -Wno-unused-do-bind
 - -rtsopts
-- -O2
+- -O
 
 default-extensions:
   - OverloadedStrings

@@ -76,7 +76,7 @@ pHGT = do
       fail $ show n <> " inches is not in range [59, 76]"
   when (unit == "cm") $ do
     unless (n >= 150 && n <= 193) $ do
-      fail $ show n <> " inches is not in range [150, 193]"
+      fail $ show n <> " cm is not in range [150, 193]"
   pure "hgt"
 
 passportParser2 :: Parser ()
@@ -84,6 +84,6 @@ passportParser2 = do
   fields <- choice [pBYR, pIYR, pEYR, pHGT, pHCL, pECL, pPID, pCID]
     `sepEndBy` oneOf (" \n" :: [Char])
   let required = words "byr iyr eyr hgt hcl ecl pid"
-      missing = required \\ (fields \\ ["cid"])
+      missing  = required \\ fields
   unless (null missing) $ do
     failure Nothing (Set.fromList (Label . NEL.fromList . show <$> missing))

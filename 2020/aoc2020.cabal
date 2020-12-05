@@ -12,6 +12,7 @@ executable aoc2020
     Day02
     Day03
     Day04
+    Day05
     Parsing
 
   build-depends:
@@ -19,6 +20,7 @@ executable aoc2020
     , containers              ^>=0.6.2
     , criterion               ^>=1.5.9
     , extra                   ^>=1.7.8
+    , foldl                   ^>=1.4.10
     , megaparsec              ^>=9.0.1
     , protolude               ^>=0.3.0
     , qm-interpolated-string  ^>=0.3.0
@@ -30,7 +32,6 @@ executable aoc2020
 
   default-extensions:
     BangPatterns
-    BlockArguments
     LambdaCase
     MultiWayIf
     NoImplicitPrelude
@@ -39,6 +40,7 @@ executable aoc2020
     QuasiQuotes
     RecordWildCards
     ScopedTypeVariables
+    StrictData
     ViewPatterns
 
   default-language:   Haskell2010

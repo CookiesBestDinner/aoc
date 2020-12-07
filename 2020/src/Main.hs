@@ -9,6 +9,8 @@ import qualified Day02
 import qualified Day03
 import qualified Day04
 import qualified Day05
+import qualified Day06
+import qualified Day07
 
 main :: IO ()
 main = do
@@ -27,3 +29,5 @@ main = do
     ["03"] -> Day03.main =<< input
     ["04"] -> Day04.main =<< input
     ["05"] -> Day05.main =<< input
+    ["06"] -> Day06.main =<< input
+    ["07"] -> Day07.main =<< input

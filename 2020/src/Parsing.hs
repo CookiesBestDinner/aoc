@@ -3,7 +3,6 @@ module Parsing where
 
 import           Protolude
 import           Text.Megaparsec
-import           Text.Megaparsec.Char
 import           Text.Megaparsec.Char.Lexer (decimal, signed)
 
 type Parser = Parsec Void Text

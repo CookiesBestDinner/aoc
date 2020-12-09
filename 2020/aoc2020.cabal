@@ -16,6 +16,7 @@ executable aoc2020
     Day06
     Day07
     Day08
+    Day09
     Parsing
 
   build-depends:
@@ -27,6 +28,7 @@ executable aoc2020
     , megaparsec              ^>=9.0.1
     , protolude               ^>=0.3.0
     , qm-interpolated-string  ^>=0.3.0
+    , silently                ^>=1.2.5
     , split                   ^>=0.2.3
     , stm                     ^>=2.5.0
     , text                    ^>=1.2.3
@@ -35,6 +37,7 @@ executable aoc2020
 
   default-extensions:
     BangPatterns
+    BlockArguments
     LambdaCase
     MultiWayIf
     NoImplicitPrelude

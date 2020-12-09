@@ -21,15 +21,17 @@ data Comp
       }
   deriving (Show)
 
+data ExitReason = Terminates | Loops deriving (Show)
+
 pIns :: Parser Ins
 pIns = ("nop " $> Nop <|> "acc " $> Acc <|> "jmp " $> Jmp) <*> number
 
-run :: Map Int Ins -> Comp -> Either Comp Comp
+run :: Map Int Ins -> Comp -> (Comp, ExitReason)
 run ins = go mempty
  where
   go seen comp
-    | pc comp `M.notMember` ins = Left comp
-    | pc comp `S.member` seen = Right comp
+    | pc comp `M.notMember` ins = (comp, Terminates)
+    | pc comp `S.member` seen = (comp, Loops)
     | otherwise = case ins M.! pc comp of
       Nop _ -> go newseen comp { pc = pc comp + 1 }
       Acc n -> go newseen comp { pc = pc comp + 1, acc = acc comp + n }
@@ -49,5 +51,5 @@ main input = do
   print $ run imap (Comp 0 0)
   let candidates = rights $ swapIns <$> [imap] <*> [0 .. length ilist - 1]
   forM_ candidates $ \alt -> case run alt (Comp 0 0) of
-    Right _ -> pure ()
-    Left  c -> print c
+    (  _, Loops     ) -> pure ()
+    c@(_, Terminates) -> print c

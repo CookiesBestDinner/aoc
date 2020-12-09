@@ -3,6 +3,7 @@ module Main where
 import           Criterion
 import           Protolude
 import           System.Environment
+import           System.IO.Silently
 
 import qualified Day01
 import qualified Day02
@@ -12,6 +13,7 @@ import qualified Day05
 import qualified Day06
 import qualified Day07
 import qualified Day08
+import qualified Day09
 
 main :: IO ()
 main = do
@@ -22,8 +24,8 @@ main = do
         Nothing       -> readFile $ mconcat $ "input/" : take 1 execArgs
         Just "-"      -> getContents
         Just filename -> readFile filename
-  let run a | take 1 args == ["bench"] = benchmark (nfIO a)
-            | otherwise                       = a
+  let run a | take 1 args == ["bench"] = benchmark (nfIO (silence a))
+            | otherwise                = a
   run $ withArgs dayArgs $ case take 1 execArgs of
     ["01"] -> Day01.main =<< input
     ["02"] -> Day02.main =<< input
@@ -33,3 +35,4 @@ main = do
     ["06"] -> Day06.main =<< input
     ["07"] -> Day07.main =<< input
     ["08"] -> Day08.main =<< input
+    ["09"] -> Day09.main =<< input

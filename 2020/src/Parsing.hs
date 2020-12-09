@@ -7,7 +7,7 @@ import           Text.Megaparsec.Char.Lexer (decimal, signed)
 
 type Parser = Parsec Void Text
 
-number :: Parser Int
+number :: Integral i => Parser i
 number = signed (pure ()) decimal
 
 restOfLine :: ConvertText Text s => Parser s

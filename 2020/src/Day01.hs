@@ -1,8 +1,6 @@
 module Day01 where
 
 import           Protolude
-import           Text.Megaparsec
-import           Text.Megaparsec.Char
 
 import           Parsing
 
@@ -25,6 +23,6 @@ part2 x xs = do
 
 main :: Text -> IO ()
 main input = do
-  indata <- parse' (number `sepEndBy1` space1) input
+  indata <- parse' numbers input
   print $ take 1 $ part1 2020 indata
   print $ take 1 $ part2 2020 indata

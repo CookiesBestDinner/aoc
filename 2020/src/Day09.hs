@@ -1,8 +1,6 @@
 module Day09 where
 
 import           Protolude
-import           Text.Megaparsec
-import           Text.Megaparsec.Char
 
 import           Parsing
 
@@ -24,7 +22,7 @@ findSet xs invalid = find ((== invalid) . sum) candidates
 
 main :: Text -> IO ()
 main input = do
-  indata <- parse' (number `sepEndBy1` space1) input
+  indata <- parse' numbers input
   let invalid = findInvalid indata
   print invalid
   print $ invalid >>= findSet indata <&> liftA2 (+) minimum maximum

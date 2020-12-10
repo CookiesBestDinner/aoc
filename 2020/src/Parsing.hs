@@ -3,12 +3,16 @@ module Parsing where
 
 import           Protolude
 import           Text.Megaparsec
+import           Text.Megaparsec.Char
 import           Text.Megaparsec.Char.Lexer (decimal, signed)
 
 type Parser = Parsec Void Text
 
 number :: Integral i => Parser i
 number = signed (pure ()) decimal
+
+numbers :: Integral i => Parser [i]
+numbers = number `sepEndBy1` space1
 
 restOfLine :: ConvertText Text s => Parser s
 restOfLine = toS <$> takeWhileP Nothing (/= '\n') <* ("\n" $> () <|> eof)

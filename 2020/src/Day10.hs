@@ -20,19 +20,19 @@ main input = do
   putText "\ndiffs"
   print diffs
   putText $ "count(1) * count(3) = " <> show (ones * threes)
-  -- part 2
+  putText "--------------- part 2"
   -- observation: cannot skip difference of 3
   --            , there is no diff of 2
   -- so, split on 3s, count combinations for individual runs, multiply
   -- together
   -- the two values creating diff of 3 must always be included
-  putText "--------------- part 2"
-  putText "cut on the differences of 3"
-  print $ splitAtThrees indata'
-  let runs = dropEnd 1 . drop 1 <$> splitAtThrees indata'
+  let cut = splitAtThrees indata'
+  let runs = dropEnd 1 . drop 1 <$> cut
   let lens          = length <$> runs
   let arrangeCounts = ways <$> lens
   let answer        = product arrangeCounts
+  putText "cut on the differences of 3"
+  print cut
   putText "\ndrop the values that create that diff of 3"
   print runs
   putText "\nonly the length is interesting at this point, they all have diff=1"

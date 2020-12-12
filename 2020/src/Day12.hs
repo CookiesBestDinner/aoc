@@ -1,6 +1,8 @@
 {-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE TemplateHaskell #-}
 module Day12 where
 
+import           Control.Lens
 import           Data.List                  (iterate', (!!))
 import qualified Data.Text                  as T
 import           Protolude
@@ -8,18 +10,19 @@ import           Text.Megaparsec
 import           Text.Megaparsec.Char
 import           Text.Megaparsec.Char.Lexer (decimal)
 
+
 import           Parsing
 
-data Dir = West | South | North | East deriving (Show)
 data Comp
   = Comp
-      { posx  :: Int
-      , posy  :: Int
-      , face  :: Dir
-      , shipx :: Int
-      , shipy :: Int
+      { _posx  :: Int
+      , _posy  :: Int
+      , _shipx :: Int
+      , _shipy :: Int
       }
   deriving (Show)
+
+makeLenses ''Comp
 
 data ExitReason = Terminates | Loops deriving (Show)
 
@@ -31,50 +34,33 @@ pIns =
           <*> decimal
   in  (ln `sepEndBy1` eol) <* eof
 
-facex (face -> East) = 1
-facex (face -> West) = -1
-facex _              = 0
-facey (face -> North) = 1
-facey (face -> South) = -1
-facey _               = 0
-
-right c@Comp { face } = c { face = face' }
- where
-  face' = case face of
-    North -> East
-    East  -> South
-    South -> West
-    West  -> North
-
-step comp (c, n) = case c of
-  'N' -> comp { posy = posy comp + n }
-  'S' -> comp { posy = posy comp - n }
-  'E' -> comp { posx = posx comp + n }
-  'W' -> comp { posx = posx comp - n }
-  'R' -> iterate' right comp !! (n `div` 90)
-  'L' -> iterate' (`step` ('R', n)) comp !! 3
-  'F' -> comp { posx = posx comp + n * facex comp
-              , posy = posy comp + n * facey comp
-              }
-
-step2 comp (c, n) = case c of
-  'N' -> comp { posy = posy comp + n }
-  'S' -> comp { posy = posy comp - n }
-  'E' -> comp { posx = posx comp + n }
-  'W' -> comp { posx = posx comp - n }
+step
+  :: ASetter Comp Comp Int Int
+  -> ASetter Comp Comp Int Int
+  -> Comp
+  -> (Char, Int)
+  -> Comp
+step mvx mvy comp (c, n) = case c of
+  'N' -> comp & mvy %~ (+ n)
+  'S' -> comp & mvy %~ subtract n
+  'E' -> comp & mvx %~ (+ n)
+  'W' -> comp & mvx %~ subtract n
   'R' -> if n == 0
     then comp
-    else step2 (comp { posx = posy comp, posy = posx comp * (-1) }) (c, n - 90)
-  'L' -> iterate' (`step2` ('R', n)) comp !! 3
-  'F' -> comp { shipx = shipx comp + n * posx comp
-              , shipy = shipy comp + n * posy comp
-              }
+    else step mvx
+              mvy
+              (comp & (posx .~ comp ^. posy) . (posy .~ comp ^. posx * (-1)))
+              (c, n - 90)
+  'L' -> iterate' (\comp' -> step mvx mvy comp' ('R', n)) comp !! 3
+  'F' ->
+    comp & (shipx %~ (+ n * (comp ^. posx))) . (shipy %~ (+ n * (comp ^. posy)))
+  _ -> panic $ "invalid command" <> show c
 
+manhattan :: Comp -> Int
+manhattan comp = abs (comp ^. shipy) + abs (comp ^. shipx)
 
 main :: Text -> IO ()
 main input = do
   instr <- parse' pIns input
-  let final1 = foldl' step (Comp 0 0 East 0 0) instr
-  print $ abs (posy final1) + abs (posx final1)
-  let final2 = foldl' step2 (Comp 10 1 East 0 0) instr
-  print $ abs (shipy final2) + abs (shipx final2)
+  print $ foldl' (step shipx shipy) (Comp 1 0 0 0) instr & manhattan
+  print $ foldl' (step posx posy) (Comp 10 1 0 0) instr & manhattan

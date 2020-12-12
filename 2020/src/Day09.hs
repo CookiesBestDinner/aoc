@@ -8,8 +8,8 @@ findInvalid :: [Integer] -> Maybe Integer
 findInvalid xs = listToMaybe $ go (take 25 <$> tails xs) (drop 25 xs)
  where
   isSum x prev = or $ (\a b -> a /= b && a + b == x) <$> prev <*> prev
-  go (p : rev) (x : xs) | isSum x p = go rev xs
-                        | otherwise = x : go rev xs
+  go (p : rev) (y : ys) | isSum y p = go rev ys
+                        | otherwise = y : go rev ys
   go _ _ = []
 
 findSet :: [Integer] -> Integer -> Maybe [Integer]

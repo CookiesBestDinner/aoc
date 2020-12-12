@@ -7,6 +7,12 @@ author:        jonatan
 executable aoc2020
   hs-source-dirs:     src
   main-is:            Main.hs
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists -Wpartial-fields
+    -Wno-unused-do-bind -Wredundant-constraints -fhide-source-paths
+    -Wno-missing-export-lists
+
   other-modules:
     Day01
     Day02
@@ -28,6 +34,7 @@ executable aoc2020
     , criterion               ^>=1.5.9
     , extra                   ^>=1.7.8
     , foldl                   ^>=1.4.10
+    , lens                    ^>=4.19.2
     , megaparsec              ^>=9.0.1
     , protolude               ^>=0.3.0
     , qm-interpolated-string  ^>=0.3.0
@@ -39,11 +46,11 @@ executable aoc2020
     , vector                  ^>=0.12.1
 
   default-extensions:
+    NoImplicitPrelude
     BangPatterns
     BlockArguments
     LambdaCase
     MultiWayIf
-    NoImplicitPrelude
     NumericUnderscores
     OverloadedStrings
     QuasiQuotes

@@ -42,3 +42,4 @@ main = do
     ["10"] -> Day10.main =<< input
     ["11"] -> Day11.main =<< input
     ["12"] -> Day12.main =<< input
+    _ -> putText "day not recognized." >> exitFailure

@@ -4,13 +4,13 @@ import           Protolude
 
 import           Parsing
 
+part1, part2 :: Int -> [Int] ->  [Int]
 part1 x xs = do
   a <- xs
   b <- xs
   guard $ a /= b
   guard $ a + b == x
   pure $ a * b
-
 part2 x xs = do
   a <- xs
   b <- xs

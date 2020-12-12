@@ -26,8 +26,8 @@ main input = do
   -- so, split on 3s, count combinations for individual runs, multiply
   -- together
   -- the two values creating diff of 3 must always be included
-  let cut = splitAtThrees indata'
-  let runs = dropEnd 1 . drop 1 <$> cut
+  let cut           = splitAtThrees indata'
+  let runs          = dropEnd 1 . drop 1 <$> cut
   let lens          = length <$> runs
   let arrangeCounts = ways <$> lens
   let answer        = product arrangeCounts
@@ -43,7 +43,9 @@ main input = do
 
 -- welcome to this mess.
 -- it might for that matter be wrong seeing as it's only used up to x=3
+ways :: Int -> Integer
 ways = (([0 ..] <&> \n -> ways' 0 (n + 1) [1 .. n]) !!)
+ways' :: Int -> Int -> [Int] -> Integer
 ways' _ _ [] = 1
 ways' s e [x] | inRange (s, s + 3) e = 2
               | inRange (s, s + 3) x && inRange (e - 3, e) x = 1
@@ -61,6 +63,7 @@ ways' s e (a : b : xs)
     , ways' s e xs
     ]
 
+splitAtThrees :: [Int] -> [[Int]]
 splitAtThrees []  = []
 splitAtThrees [x] = [[x]]
 splitAtThrees xs  = here : splitAtThrees rest
@@ -68,6 +71,7 @@ splitAtThrees xs  = here : splitAtThrees rest
   here = takeTo3 xs
   rest = drop (length here) xs
 
+takeTo3 :: (Eq a, Num a) => [a] -> [a]
 takeTo3 (a : b : xs) | b - a == 3 = [a]
                      | otherwise  = a : takeTo3 (b : xs)
 takeTo3 xs = xs

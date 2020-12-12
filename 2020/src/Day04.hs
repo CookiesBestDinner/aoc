@@ -20,6 +20,7 @@ main input = do
   print $ filter isValidPassport parsedPassports & length
   print $ length $ rights $ parse passportParser2 "" <$> passports
 
+showandtell :: [Text] -> IO ()
 showandtell passports = do
   forM_ passports $ \passport -> do
     putText "--------------------INPUT----------------------"
@@ -40,6 +41,7 @@ passportParser = pField `sepEndBy1` space <* eof
     value <- takeWhile1P Nothing (not . isSpace)
     pure (toS key, toS value)
 
+isValidPassport :: [([Char], a)] -> Bool
 isValidPassport fields = all isPresent requiredFields
  where
   presentFields  = fst <$> fields
@@ -57,6 +59,7 @@ numFieldParser len lo hi = do
   unless (n >= lo && n <= hi) $ do
     fail $ show n <> " is not in range [" <> show lo <> ", " <> show hi <> "]"
 
+pBYR, pIYR, pEYR, pHCL, pECL, pPID, pCID, pHGT :: Parser Text
 pBYR = "byr:" >> numFieldParser 4 1920 2002 >> pure "byr"
 pIYR = "iyr:" >> numFieldParser 4 2010 2020 >> pure "iyr"
 pEYR = "eyr:" >> numFieldParser 4 2020 2030 >> pure "eyr"

@@ -4,16 +4,14 @@ module Day12 where
 
 import           Control.Lens
 import           Data.List                  (iterate', (!!))
-import qualified Data.Text                  as T
 import           Protolude
 import           Text.Megaparsec
 import           Text.Megaparsec.Char
 import           Text.Megaparsec.Char.Lexer (decimal)
 
-
 import           Parsing
 
-data Comp
+data Comp -- It's not a boat, it's a VM.
   = Comp
       { _posx  :: Int
       , _posy  :: Int
@@ -28,10 +26,7 @@ data ExitReason = Terminates | Loops deriving (Show)
 
 pIns :: Parser [(Char, Int)]
 pIns =
-  let ln =
-        (,)
-          <$> choice (map T.head <$> ["N", "S", "E", "W", "L", "R", "F"])
-          <*> decimal
+  let ln = (,) <$> oneOf ("NSEWLRF" :: [Char]) <*> decimal
   in  (ln `sepEndBy1` eol) <* eof
 
 step

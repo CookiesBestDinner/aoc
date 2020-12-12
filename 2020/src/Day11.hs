@@ -32,14 +32,16 @@ parseFerry = do
       isInBounds = inRange ((0, 0), (width - 1, height - 1))
   pure $ Ferry { .. }
 
+step :: (Ferry -> (Int, Int) -> [(Int, Int)]) -> Int -> Ferry -> Ferry
 step around leave f = f { taken = newTaken }
  where
   newTaken = Set.fromList $ do
     here <- exist f & Set.toList
     let occupancy = sum [ 1 | loc <- around f here, loc `Set.member` taken f ]
-        empty     = here `Set.notMember` taken f
-    [ here | empty && occupancy == 0 || not empty && occupancy < leave ]
+        isempty     = here `Set.notMember` taken f
+    [ here | isempty && occupancy == 0 || not isempty && occupancy < leave ]
 
+around1, around2 :: Ferry -> (Int, Int) -> [(Int, Int)]
 around1 _ (x, y) =
   (\dx dy -> (x + dx, y + dy)) <$> [-1 .. 1] <*> [-1 .. 1] & filter (/= (x, y))
 
@@ -52,6 +54,7 @@ around2 f (x, y) = do
     &   take 1
     &   filter (`Set.member` taken f)
 
+run :: (Ferry -> (Int, Int) -> [(Int, Int)]) -> Int -> Ferry -> Int
 run around n ferry | taken ferry == taken ferry' = ferry & taken & Set.size
                    | otherwise                   = run around n ferry'
   where ferry' = step around n ferry

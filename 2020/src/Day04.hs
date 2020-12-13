@@ -1,11 +1,11 @@
 module Day04 where
 
-import           Control.Monad        (fail)
+import           Control.Monad                            ( fail )
 import           Data.Char
-import           Data.List            ((\\))
-import qualified Data.List.NonEmpty   as NEL
-import qualified Data.Set             as Set
-import qualified Data.Text            as Text
+import           Data.List                                ( (\\) )
+import qualified Data.List.NonEmpty            as NEL
+import qualified Data.Set                      as Set
+import qualified Data.Text                     as Text
 import           Protolude
 import           Text.Megaparsec
 import           Text.Megaparsec.Char
@@ -72,8 +72,8 @@ pPID = "pid:" >> replicateM 9 digit >> pure "pid"
 pCID = "cid:" >> takeWhileP Nothing (not . isSpace) >> pure "cid"
 pHGT = do
   "hgt:"
-  n    <- number
-  unit <- "cm" <|> "in"
+  n :: Int <- number
+  unit     <- "cm" <|> "in"
   when (unit == "in") $ do
     unless (n >= 59 && n <= 76) $ do
       fail $ show n <> " inches is not in range [59, 76]"

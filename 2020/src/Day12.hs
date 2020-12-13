@@ -1,5 +1,3 @@
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE TemplateHaskell #-}
 module Day12 where
 
 import           Control.Lens
@@ -21,8 +19,6 @@ data Comp -- It's not a boat, it's a VM.
   deriving (Show)
 
 makeLenses ''Comp
-
-data ExitReason = Terminates | Loops deriving (Show)
 
 pIns :: Parser [(Char, Int)]
 pIns =

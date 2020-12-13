@@ -33,7 +33,7 @@ valid password = inRange (lo password, hi password) matchcount
 validpart2 :: Password -> Bool
 validpart2 password = matchAt lo /= matchAt hi
  where
-  matchAt (($password) -> n) =
+  matchAt (($ password) -> n) =
     str password & take n & drop (n - 1) & (== [ch password])
 
 main :: Text -> IO ()

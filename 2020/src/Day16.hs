@@ -1,80 +1,93 @@
 module Day16 where
 
-import           Data.Char
+import           Control.Arrow
 import           Data.Ix                    (inRange)
 import           Data.List                  ((!!))
-import qualified Data.Set as Set
-import           Data.List.Extra            (chunksOf, groupOn)
+import qualified Data.Set                   as Set
 import qualified Data.Text                  as T
-import qualified Prelude                    as P
-import           Protolude
+import           Protolude                  hiding (many, try)
 import           Text.Megaparsec
 import           Text.Megaparsec.Char
 import           Text.Megaparsec.Char.Lexer (decimal)
 
 import           Parsing
 
-lnToRange s = [(a, b), (c, d)]
- where
-  [a, b, c, d] :: [Int] = groupOn isDigit s & filter (all isDigit) <&> P.read
+data FieldSpec
+  = FieldSpec
+      { name :: Text
+      , r1   :: (Int, Int)
+      , r2   :: (Int, Int)
+      }
+  deriving (Show)
 
-nearbyNumsP :: Parser [[Int]]
-nearbyNumsP = do
-  "nearby tickets:"
-  space
-  let row = decimal `sepEndBy` ","
-  row `sepEndBy` eol
+data Input
+  = Input
+      { fieldSpecs   :: [FieldSpec]
+      , yourTicket   :: [Int]
+      , otherTickets :: [[Int]]
+      }
 
-myticketP :: Parser [Int]
-myticketP = do
-  "your ticket:"
-  space
-  decimal `sepEndBy` "," <* space <* eof
+rangeP :: Parser FieldSpec
+rangeP = try $ do
+  name <- takeWhileP Nothing (`notElem` [':', '\n']) <* ": "
+  r1   <- (,) <$> decimal <* "-" <*> decimal <* " or "
+  r2   <- (,) <$> decimal <* "-" <*> decimal <* eol
+  pure $ FieldSpec { .. }
 
+inputP :: Parser Input
+inputP = do
+  let ticketP = decimal `sepBy` "," <* eol
+  fieldSpecs <- many rangeP <* eol
+  "your ticket:" >> eol
+  yourTicket <- ticketP <* eol
+  "nearby tickets:" >> eol
+  otherTickets <- many ticketP <* eof
+  pure $ Input { .. }
 
-possiblyValid :: [(Int, Int)] -> Int -> Bool
-possiblyValid ranges n = not $ null $ do
-  (lo, hi) <- ranges
-  guard $ inRange (lo, hi) n
-  pure ()
+invalid :: [(Int, Int)] -> Int -> Bool
+invalid ranges n = not (any matches ranges)
+  where matches range = inRange range n
 
 untangle :: [[Int]] -> [[Int]]
-untangle = go mempty
-  where
-    go seen (xs: xss) = xs' : go newseen xss
-      where
-        xs' = filter (`Set.notMember`seen) xs
-        inserts = Set.fromList xs'
-        newseen = seen <> inserts
-    go seen [] = []
+untangle css =
+  go mempty (snd <$> byLenWPos) & zip (fst <$> byLenWPos) & sortOn fst <&> snd
+ where
+  byLenWPos = zip [0 :: Int ..] css & sortOn (length . snd)
+  go seen (xs : xss) = xs' : go newseen xss
+   where
+    xs'     = filter (`Set.notMember` seen) xs
+    newseen = seen <> Set.fromList xs'
+  go _ [] = []
+
+part2 :: Input -> Int
+part2 indata =
+  let ranges      = fieldSpecs indata >>= (\field -> [r1 field, r2 field])
+      validTicket = not . any (invalid ranges)
+      validOthers = filter validTicket (otherTickets indata)
+      getPositions fields = untangle (getCandidates <$> fields)
+      getCandidates field = do
+        let width = validOthers <&> length & maximumDef 0
+        pos <- [0 .. width - 1]
+        let values = validOthers <&> (!! pos)
+            isok val = inRange (r1 field) val || inRange (r2 field) val
+        guard $ all isok values
+        pure pos
+  in  fieldSpecs indata
+        &   getPositions
+        &   zip [0 :: Int ..]
+        &   sortOn snd
+        &   zip (yourTicket indata)
+        &   sortOn (fst . snd)
+        <&> fst
+        &   zip (fieldSpecs indata)
+        &   filter (fst >>> name >>> T.isPrefixOf "departure")
+        <&> snd
+        &   product
 
 main :: Text -> IO ()
 main input = do
-  let [fields, mine, others] = T.splitOn "\n\n" input
-  let ranges = fields & T.splitOn "\n" <&> toS <&> lnToRange & mconcat
-  othertickets <- parse' nearbyNumsP others
-  print $ othertickets & mconcat & filter (not . possiblyValid ranges) & sum
-  let hasInvalid :: [Int] -> Bool = not . all (possiblyValid ranges)
-  let validOthers                 = filter (not . hasInvalid) othertickets & filter (not .null)
-  let identifyPos [range1, range2] = do
-        pos <- [0 .. 19]
-        let values :: [Int] = validOthers <&> (!! pos)
-        let isok val = inRange range1 val || inRange range2 val
-        guard $ all isok values
-        pure pos
-  -- part2
-  print "--"
-  let order = chunksOf 2 ranges <&> identifyPos & sortOn length & untangle & concat
-  let something = chunksOf 2 ranges <&> identifyPos & zip [0..] & sortOn (length . snd)
-  let lsts = something <&> snd & untangle
-  let is = fst <$> something
-  let paired = zip is lsts & sortOn fst
-  let betterorder = paired <&> snd & concat
-  let want = take 6 betterorder
-  mytick <- parse' myticketP mine
-  let get i = mytick !! i
-  print ("my ticket", mytick)
-  print ("want", want)
-  print $ want <&> get
-  print $ want <&> get & product
-  print $ want <&> get <&> toInteger & product
+  indata <- parse' inputP input
+  let ranges = fieldSpecs indata >>= (\field -> [r1 field, r2 field])
+  print $ yourTicket indata
+  print $ otherTickets indata & mconcat & filter (invalid ranges) & sum
+  print $ part2 indata

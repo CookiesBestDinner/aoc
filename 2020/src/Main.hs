@@ -23,6 +23,7 @@ import qualified Day15
 import qualified Day16
 import qualified Day17
 import qualified Day18
+import qualified Day19
 
 main :: IO ()
 main = do
@@ -54,4 +55,5 @@ main = do
     ["16"] -> Day16.main =<< input
     ["17"] -> Day17.main =<< input
     ["18"] -> Day18.main =<< input
+    ["19"] -> Day19.main =<< input
     _ -> putText "day not recognized." >> exitFailure

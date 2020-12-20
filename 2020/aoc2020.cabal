@@ -32,10 +32,12 @@ executable aoc2020
     Day16
     Day17
     Day18
+    Day19
     Parsing
 
   build-depends:
     , array                   ^>=0.5.4
+    , attoparsec
     , base                    ^>=4.14.1.0
     , containers              ^>=0.6.2
     , criterion               ^>=1.5.9
